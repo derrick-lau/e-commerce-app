@@ -1,0 +1,45 @@
+.homepage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+  
+.homepage section {
+  width:30vw;
+  height: 30vh;
+  flex:auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  margin: 3vh 3vw ;
+}
+ 
+.homepage section title {
+  height: 50%;
+  width:50%;
+  padding: 2vh 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+  
+.homepage section a {
+  height: 50%;
+  width:50%;
+  padding: 2vh 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  font-weight: bold;
+  margin-bottom: 2%;
+  font-size: 3.6vmin;
+  text-align: center;
+  color: #4a4a4a;
+  text-decoration: none;
+}
+  
