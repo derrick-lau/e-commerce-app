@@ -2,5 +2,5 @@ node_modules/
 .idea
 .env
 dev
-.next
-next-env.d
+.next/
+next-env.d.ts
