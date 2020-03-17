@@ -1,5 +1,5 @@
-
-export type User = {
-  id: number
-  name: string
+export interface route {
+  section: String;
+  pageLink: String;
+  imgLink: String;
 }
