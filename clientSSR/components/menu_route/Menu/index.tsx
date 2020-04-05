@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Route from '../route';
+import Route from '../Route';
 
 interface directory {
 

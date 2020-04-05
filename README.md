@@ -1,30 +1,13 @@
-# REST API With Flask & SQL Alchemy
+# E-commerce-app
 
-> Products API using Python Flask, SQL Alchemy and Marshmallow
+The client-side project project is using Next.js(a framework of jaascript) and TypeScript (a superset of Javascript) to improve SEO and maintainability. The RESTful server is using Python-Flask.
 
-## Quick Start Using Pipenv
+# Overview
 
-``` bash
-# Activate venv
-$ pipenv shell
 
-# Install dependencies
-$ pipenv install
+# Features
 
-# Create DB
-$ python
->> from app import db
->> db.create_all()
->> exit()
 
-# Run Server (http://localhst:5000)
-python app.py
-```
+# Setup & Installation
 
-## Endpoints
-
-* GET     /product
-* GET     /product/:id
-* POST    /product
-* PUT     /product/:id
-* DELETE  /product/:id
+# Roadmap
