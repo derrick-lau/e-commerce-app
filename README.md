@@ -1,6 +1,6 @@
 # E-commerce-app
 
-The client is using Next.js (a framework of javascript) and TypeScript (a superset of Javascript) to improve SEO, testability and maintainability. The RESTful server is using Python-Flask.
+The client is using Next.js (a framework of javascript) and TypeScript (a superset of Javascript) to improve SEO, reusability, testability and maintainability. The RESTful server is using Python-Flask.
 
 # Overview
 
