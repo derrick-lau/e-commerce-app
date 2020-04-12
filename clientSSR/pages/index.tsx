@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { NextPage } from 'next'
 import styles from './index.module.css'
-import Menu from '../components/menu_route/Menu'
+import Menu from '../components/menu&route/Menu'
 
 const IndexPage: NextPage = () => (
-    <main className={styles.homepage}>
-      <Menu/>
-    </main>
+  <main className={styles.homepage}>
+    <Menu/>
+  </main>
 )
 
 export default IndexPage
