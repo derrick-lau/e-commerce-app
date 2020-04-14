@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import CustomHead from '../components/documents/CustomHead'
 
+
 class MyDocument extends Document {
   render() {
     return (

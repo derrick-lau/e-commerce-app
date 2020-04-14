@@ -28,7 +28,7 @@ const MenuContext: Context<route[]>= createContext([
         pageLink: 'store/graphics'
     },
     {
-        section: 'Cases & Coolings',
+        section: 'Cases and Coolings',
         imgLink: '',
         id: 5,
         pageLink: 'store/cases&coolings'

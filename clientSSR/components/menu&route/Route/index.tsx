@@ -9,7 +9,9 @@ const Route: React.FC<Iroute> = ({id, section, pageLink, imgLink}) => {
     
         <section id={id.toString()} className={styles.route} >
             <picture style={{backgroundImage: `url(${imgLink})`}}>
-                <Link href={{ pathname: `/${pageLink}`, }} ><a>{section}</a></Link>
+                <Link href={`/${pageLink}?name=${section}`} >
+                    <a>{section}</a>
+                </Link>
             </picture>
         </section>
     )

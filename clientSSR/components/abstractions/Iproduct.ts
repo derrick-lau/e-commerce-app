@@ -1,7 +1,7 @@
 
 export default interface Iproduct {
     id:number;
-    name:string;
+    product_name:string;
     imageUrl:string;
     price:number;
 }
