@@ -6,14 +6,8 @@ const Menu: React.FC = () => (
     <MenuContext.Consumer>
     {
         menu => (
-                menu.map(({id, section, pageLink, imgLink}) => (
-                <Route 
-                    key={id} 
-                    id={id}
-                    section={section} 
-                    pageLink={pageLink} 
-                    imgLink={imgLink}
-                />
+                menu.map(({...props}) => (
+                <Route key={props.id} {...props}/>
             ))
         )
     }

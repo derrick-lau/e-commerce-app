@@ -25,7 +25,7 @@ const Header: React.FC<Iheader> = () => {
                         Contact
                     </a>
                 </Link>
-                <Link href={'/sign'} >
+                <Link href={'/sign_in_up'} >
                     {/* onClick = { ()=>{dispatch(setIsSignedInFalse); window.sessionStorage.clear();} } */}
                     <a className={styles.route}>
                     Sign out
