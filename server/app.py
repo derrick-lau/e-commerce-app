@@ -1,24 +1,31 @@
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
+from flask_bcrypt import Bcrypt
 
 from db import db
 from blacklist import BLACKLIST
-from resources.user import UserRegister, UserLogin, User, TokenRefresh, UserLogout
-from resources.item import Item, ItemList
-from resources.store import Store, StoreList
+from controllers.userController import UserRegisterController, UserSigninController, UserController, TokenRefreshController, UserSignoutController
+from controllers.productController import ProductController, ProductsController
+from controllers.storeController import StoreController, StoresController
+from controllers.reviewController import ReviewController
+
+
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
-app.config["JWT_BLACKLIST_ENABLED"] = True  # enable blacklist feature
+app.config["JWT_BLACKLIST_ENABLED"] = True 
 app.config["JWT_BLACKLIST_TOKEN_CHECKS"] = [
     "access",
     "refresh",
-]  # allow blacklisting for access and refresh tokens
-app.secret_key = "jose"  # could do app.config['JWT_SECRET_KEY'] if we prefer
+]  
+app.secret_key = "forka"  
 api = Api(app)
+
+bcrypt = Bcrypt(app)
 
 
 @app.before_first_request
@@ -29,86 +36,82 @@ def create_tables():
 jwt = JWTManager(app)
 
 
+# check if user is admin (id==1 the first user)
 @jwt.user_claims_loader
-def add_claims_to_jwt(
-    identity
-):  # Remember identity is what we define when creating the access token
-    if (
-        identity == 1
-    ):  # instead of hard-coding, we should read from a file or database to get a list of admins instead
-        return {"is_admin": True}
-    return {"is_admin": False}
+def addJwtClaims(_id):  
+    if (_id == 1):  
+        return {"isAdmin": True}
+    else:
+        return {"isAdmin": False}
 
 
-# This method will check if a token is blacklisted, and will be called automatically when blacklist is enabled
+# check if a token is blacklisted
 @jwt.token_in_blacklist_loader
-def check_if_token_in_blacklist(decrypted_token):
-    return (
-        decrypted_token["jti"] in BLACKLIST
-    )  # Here we blacklist particular JWTs that have been created in the past.
+def checkJwtBlacklist(decrypted_token):
+    return (decrypted_token["jti"] in BLACKLIST) 
 
 
-# The following callbacks are used for customizing jwt response/error messages.
-# The original ones may not be in a very pretty format (opinionated)
+# The methods belows are for customizing jwt responses.
 @jwt.expired_token_loader
-def expired_token_callback():
-    return jsonify({"message": "The token has expired.", "error": "token_expired"}), 401
+def expiredJwtRes():
+    return (
+        jsonify({
+            "message": "The token has expired.", 
+            "error": "The token has expired."
+        }), 401,
+    )
 
 
 @jwt.invalid_token_loader
-def invalid_token_callback(
-    error
-):  # we have to keep the argument here, since it's passed in by the caller internally
+def invalidJwtRes(error):  
     return (
-        jsonify(
-            {"message": "Signature verification failed.", "error": "invalid_token"}
-        ),
-        401,
+        jsonify({
+            "message": "The token is invalid", 
+            "error": "The token is invalid."
+        }), 401,
     )
 
 
 @jwt.unauthorized_loader
-def missing_token_callback(error):
+def missingJwtRes(error):
     return (
-        jsonify(
-            {
-                "description": "Request does not contain an access token.",
-                "error": "authorization_required",
-            }
-        ),
-        401,
+        jsonify({
+            "description": "A token is missing",
+            "error": "A token is missing",
+        }), 401,
     )
 
 
 @jwt.needs_fresh_token_loader
-def token_not_fresh_callback():
+def jwtNotFreshRes():
     return (
-        jsonify(
-            {"description": "The token is not fresh.", "error": "fresh_token_required"}
-        ),
-        401,
+        jsonify({
+            "description": "The token is not fresh.", 
+            "error": "The token is not fresh."
+        }), 401,
     )
 
 
 @jwt.revoked_token_loader
-def revoked_token_callback():
+def JwtRevokedRes():
     return (
-        jsonify(
-            {"description": "The token has been revoked.", "error": "token_revoked"}
-        ),
-        401,
+        jsonify({
+            "description": "The token has been revoked.", 
+            "error": "The token has been revoked."   
+        }), 401,
     )
 
 
-api.add_resource(Store, "/store/<string:name>")
-api.add_resource(StoreList, "/stores")
-api.add_resource(Item, "/item/<string:name>")
-api.add_resource(ItemList, "/items")
-api.add_resource(UserRegister, "/register")
-api.add_resource(User, "/user/<int:user_id>")
-api.add_resource(UserLogin, "/login")
-api.add_resource(TokenRefresh, "/refresh")
-api.add_resource(UserLogout, "/logout")
+api.add_resource(StoreController, "/store/<string:name>")
+api.add_resource(StoresController, "/stores")
+api.add_resource(ProductController, "/product/<string:name>")
+api.add_resource(ProductsController, "/products")
+api.add_resource(ReviewController, "/review")
+api.add_resource(UserRegisterController, "/register")
+api.add_resource(UserController, "/user/<int:user_id>")
+api.add_resource(UserSigninController, "/signin")
+api.add_resource(TokenRefreshController, "/refresh")
+api.add_resource(UserSignoutController, "/signout")
 
 if __name__ == "__main__":
     db.init_app(app)
