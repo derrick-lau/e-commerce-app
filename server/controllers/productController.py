@@ -90,8 +90,8 @@ class ProductController(Resource):
 
 class ProductsController(Resource):
     
-    def get(self):
-        products = [product.json() for product in Product.findAll()]
+    def get(self, storeId: int):
+        products = [product.json() for product in Product.findProductsByStoreId(storeId)]
         if products:
             return {"products": products}, 200
         else:

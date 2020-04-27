@@ -80,7 +80,7 @@ class UserSigninController(Resource):
 
 class UserSignoutController(Resource):
 
-    ## signout and put the token into the blacklist
+    ## signout and add the token into the blacklist
     @jwt_required
     def post(self):
         jti = get_raw_jwt()["jti"]

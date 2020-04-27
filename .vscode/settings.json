@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "C:\\Users\\forka\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
-    "python.jediEnabled": true,
-
-    "python.linting.pylintArgs": ["--load-plugin","pylint_protobuf"] 
-}

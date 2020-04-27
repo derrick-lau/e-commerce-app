@@ -23,10 +23,10 @@ class Product(db.Model):
     def json(self):
         return {
             "id": self.id,
+            "store": self.store.findById(self.storeId).jsonWithoutProducts(),
             "image": self.image,
             "productName": self.productName,
             "price": self.price,
-            "storeId": self.storeId,
             "isInStock": self.isInStock,
             "reviews": [review.json() for review in self.reviews.all()]
         }
@@ -40,7 +40,7 @@ class Product(db.Model):
         return cls.query.filter_by(productName=productName).first()
 
     @classmethod
-    def findByStoreId(cls, _id):
+    def findProductsByStoreId(cls, _id):
         return cls.query.filter_by(storeId=_id)
 
     @classmethod

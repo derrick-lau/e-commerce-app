@@ -1,28 +1,33 @@
 from db import db
+import datetime
 
-class OrderProduct(db.Model):
-    __tablename__ = "order_products"
+class Payment(db.Model):
+    __tablename__ = "payments"
 
     id = db.Column(db.Integer, primary_key=True)
     order = db.relationship("Order")
     orderId = db.Column(db.Integer, db.ForeignKey("orders.id"))
-    product = db.relationship("Product")
-    productId = db.Column(db.Integer, db.ForeignKey("products.id"))
+    createAt = db.Column(db.String, default=datetime.datetime.utcnow)
+    method = db.Column(db.String)
 
-    def __init__(self, orderId, productId):
+    def __init__(self, orderId, method):
         self.orderId = orderId
-        self.productId = productId
+        self.method = method
 
     def json(self):
         return {
-            "id": self.id,
             "orderId": self.orderId,
-            "product":self.product.findById(self.productId).json()
+            "createAt": self.createAt,
+            "method": self.method
         }
-    
+
     @classmethod
     def findById(cls, _id):
         return cls.query.filter_by(id=_id).first()
+
+    @classmethod
+    def findByOrderId(cls, _id):
+        return cls.query.filter_by(orderId=_id).first()
 
     @classmethod
     def findAll(cls):

@@ -5,18 +5,24 @@ class Order(db.Model):
     __tablename__ = "orders"
 
     id = db.Column(db.Integer, primary_key=True)
-    createAt = db.Colum(db.DateTime, default=datetime.datetime.utcnow)
-    isPaid = db.Colum(db.Boolean, default=False)
+    user = db.relationship("User")
+    userId = db.Column(db.Integer, db.ForeignKey("users.id"))
+    createAt = db.Column(db.String, default=datetime.datetime.utcnow)
+    payment = db.relationship("Payment", lazy="dynamic")
     orderProducts = db.relationship("OrderProduct", lazy="dynamic")
 
-    def __init__(self, createAt):
-        self.createAt = createAt
+    def __init__(self, userId):
+        self.userId = userId
 
     def json(self):
+        payment1 = self.payment.first()
+        if not self.payment.first() == None:
+            payment1 = payment1.json()
         return {
             "id": self.id,
+            "userId": self.userId,
             "createAt": self.createAt,
-            "isPaid": self.isPaid,
+            "payment": payment1,
             "orderProducts": [orderProduct.json() for orderProduct in self.orderProducts.all()],
         }
 
@@ -25,13 +31,20 @@ class Order(db.Model):
         return cls.query.filter_by(id=_id).first()
 
     @classmethod
-    def find_all(cls):
+    def findOrdersByUserId(cls, _id):
+        return cls.query.filter_by(userId=_id)
+
+    @classmethod
+    def findAll(cls):
         return cls.query.all()
 
-    def save_to_db(self):
+    def save(self):
         db.session.add(self)
         db.session.commit()
 
-    def delete_from_db(self):
+    def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def getId(self):
+        return self.id

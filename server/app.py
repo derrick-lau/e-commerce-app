@@ -9,6 +9,8 @@ from controllers.userController import UserRegisterController, UserSigninControl
 from controllers.productController import ProductController, ProductsController
 from controllers.storeController import StoreController, StoresController
 from controllers.reviewController import ReviewController
+from controllers.orderController import ExistingOrderController, NewOrderController
+from controllers.paymentController import PaymentController
 
 
 
@@ -105,7 +107,10 @@ def JwtRevokedRes():
 api.add_resource(StoreController, "/store/<string:name>")
 api.add_resource(StoresController, "/stores")
 api.add_resource(ProductController, "/product/<string:name>")
-api.add_resource(ProductsController, "/products")
+api.add_resource(ProductsController, "/products/<int:storeId>")
+api.add_resource(NewOrderController, "/order")
+api.add_resource(ExistingOrderController, "/order/<int:orderId>")
+api.add_resource(PaymentController, "/payment")
 api.add_resource(ReviewController, "/review")
 api.add_resource(UserRegisterController, "/register")
 api.add_resource(UserController, "/user/<int:user_id>")

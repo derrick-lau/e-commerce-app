@@ -33,7 +33,7 @@ class ReviewController(Resource):
 
         props = ReviewController.parser.parse_args()
 
-        if Review.findByProductIdAndUserId(props["productId"], props["userId"]):
+        if Review.findReviewByProductIdAndUserId(props["productId"], props["userId"]):
             return {"message": "You already left a review"}, 400
         else:
             review = Review(**props)

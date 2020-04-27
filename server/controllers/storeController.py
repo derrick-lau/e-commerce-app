@@ -46,7 +46,7 @@ class StoreController(Resource):
         store = Store(name, **props)
 
         try:
-            store.save_to_db()
+            store.save()
 
         except:
             return {
@@ -65,9 +65,9 @@ class StoreController(Resource):
                 "message": "you are not admin"
             }, 401
 
-        store = Store.find_by_name(name)
+        store = Store.findByName(name)
         if store:
-            store.delete_from_db()
+            store.delete()
 
         return {
             "message": "Store has been deleted."
@@ -100,7 +100,7 @@ class StoreController(Resource):
 class StoresController(Resource):
     def get(self):
         return {
-            "stores": [store.jsonWithoutProducts() for store in Store.find_all()]
+            "stores": [store.jsonWithoutProducts() for store in Store.findAll()]
         }
             
 

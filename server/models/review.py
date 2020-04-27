@@ -25,8 +25,12 @@ class Review(db.Model):
         }
     
     @classmethod
-    def findByProductIdAndUserId(cls, productId, userId):
-        return cls.query.filter_by(productId=productId, userId=userId)
+    def findReviewByProductIdAndUserId(cls, productId, userId):
+        return cls.query.filter_by(productId=productId, userId=userId).first()
+
+    @classmethod
+    def findReviewsByProductId(cls, productId):
+        return cls.query.filter_by(productId=productId)
 
     @classmethod
     def findAll(cls):
