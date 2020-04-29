@@ -11,10 +11,10 @@ class Review(db.Model):
     productId = db.Column(db.Integer, db.ForeignKey("products.id"))
     userId = db.Column(db.Integer, db.ForeignKey("users.id"))
 
-    def __init__(self, content, rate, productId, userId):
+    def __init__(self, userId, content, rate, productId):
+        self.userId = userId
         self.content = content
         self.rate = rate
-        self.userId = userId
         self.productId = productId
 
     def json(self):

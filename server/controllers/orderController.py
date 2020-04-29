@@ -6,6 +6,7 @@ from flask_jwt_extended import (
     jwt_optional,
     fresh_jwt_required,
 )
+
 from models.order import Order
 from models.orderProduct import OrderProduct
 
@@ -13,11 +14,11 @@ from models.orderProduct import OrderProduct
 parser = reqparse.RequestParser()
 
 parser.add_argument(
-    "userId", type=int, required=True, help="Every order needs a storeId."
+    "orderProducts", '--list', action='append', type=dict, required=True, help="Every order needs a orderProducts."
 )
 
 parser.add_argument(
-    "productIdList", type=list, required=True, help="Every product needs a storeId."
+    "address", type=str, required=True, help="Every order needs a address."
 )
 
 class ExistingOrderController(Resource):
@@ -39,29 +40,15 @@ class ExistingOrderController(Resource):
         if order:
             order.delete()
             return {"message": "Order deleted."}, 200
-        return {"message": "Order not found."}, 404
-
-    @jwt_required
-    def put(self, orderId: int):
-
-        order = Order.findById(orderId)
-        props = parser.parse_args()
-
-        if order:
-            order.userId = props["userId"]
-            order.productIdList = props["productIdList"]
         else:
-            order = Order(**props)
-
-        order.save()
-        return order.json(), 200
+            return {"message": "Order not found."}, 404
 
 
 class NewOrderController(Resource):
 
     @jwt_required
     def get(self):
-        
+
         userId = get_jwt_identity()
         orders = [order.json() for order in Order.findOrdersByUserId(userId)]
 
@@ -75,18 +62,17 @@ class NewOrderController(Resource):
 
         props = parser.parse_args()
         userId = get_jwt_identity()
-
-        order = Order(userId)
-        productIdList = props["productIdList"]
-
+        orderProducts = props['orderProducts']
+        order = Order(userId, props['address'])
         try:
             order.save()
-            for productId in productIdList:
-                orderProduct = OrderProduct(order.id, productId)
+
+            for orderProduct in orderProducts:
+                orderProduct = OrderProduct(order.id, orderProduct['productId'], orderProduct['quantity'])
                 orderProduct.save()
         except:
             return {"message": "Something was wrong when creating the order."}, 500
         
-        return order.json(), 201
+        return {"message": "order created.", "order":order.json()}, 201
     
 

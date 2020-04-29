@@ -12,11 +12,11 @@ from models.payment import Payment
 class PaymentController(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument(
-        "orderId", type=int, required=True, help="Every order needs a storeId."
+        "orderId", type=int, required=True, help="Every payment needs a orderId."
     )
 
     parser.add_argument(
-        "method", type=str, required=True, help="Every product needs a storeId."
+        "method", type=str, required=True, help="Every payment needs a method."
     )
 
     @jwt_required

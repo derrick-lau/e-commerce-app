@@ -39,8 +39,14 @@ class UserRegisterController(Resource):
         user = User(**props)
         user.hashPassword()
         user.save()
+        accessToken = create_access_token(identity=user.id, fresh=True)
+        refreshToken = create_refresh_token(user.id)
 
-        return {"message": "User created successfully."}, 201
+        return {
+            "message": "User created successfully.",
+            "accessToken": accessToken, 
+            "refreshToken": refreshToken
+        }, 201
 
 
 class UserController(Resource):

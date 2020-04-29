@@ -8,16 +8,23 @@ class OrderProduct(db.Model):
     orderId = db.Column(db.Integer, db.ForeignKey("orders.id"))
     product = db.relationship("Product")
     productId = db.Column(db.Integer, db.ForeignKey("products.id"))
+    quantity = db.Column(db.Integer)
 
-    def __init__(self, orderId, productId):
+    def __init__(self, orderId, productId, quantity):
         self.orderId = orderId
         self.productId = productId
+        self.quantity = quantity
 
     def json(self):
+        product = self.product.findById(self.productId)
         return {
             "id": self.id,
             "orderId": self.orderId,
-            "product":self.product.findById(self.productId).json()
+            "productName":product.productName,
+            "store":product.store.storeName,
+            "price":product.price,
+            "quantity": self.quantity,
+            "total": product.price * self.quantity
         }
     
     @classmethod

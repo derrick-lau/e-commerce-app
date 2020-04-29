@@ -24,19 +24,16 @@ class ReviewController(Resource):
         "productId", type=int, required=True, help="Every Review needs a productId."
     )
 
-    parser.add_argument(
-        "userId", type=int, required=True, help="Every Review needs a userId."
-    )
-
     @jwt_required
     def post(self):
 
         props = ReviewController.parser.parse_args()
+        userId = get_jwt_identity()
 
-        if Review.findReviewByProductIdAndUserId(props["productId"], props["userId"]):
-            return {"message": "You already left a review"}, 400
+        if Review.findReviewByProductIdAndUserId(props["productId"], userId):
+            return {"message": "You already wrote a review for this product"}, 400
         else:
-            review = Review(**props)
+            review = Review(userId, **props)
 
         try:
             review.save()
