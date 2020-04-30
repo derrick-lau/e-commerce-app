@@ -28,9 +28,8 @@ parser.add_argument(
     "address", type=str, required=False, help="please enter a address"
 )
 
-
-
 class UserRegisterController(Resource):
+
     def post(self):
         props = parser.parse_args()
 
@@ -50,7 +49,6 @@ class UserRegisterController(Resource):
 
 
 class UserController(Resource):
-
 
     @jwt_required
     @classmethod
@@ -99,4 +97,4 @@ class TokenRefreshController(Resource):
     def post(self):
         currentUser = get_jwt_identity()
         newToken = create_access_token(identity=currentUser, fresh=False)
-        return {"refreshToken": newToken}, 200
+        return {"accessToken": newToken}, 200
