@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { NextPage } from 'next'
 import Layout from '../../components/Layout'
-import Sign_in_up from '../../components/Sign_in_up'
+import Register from '../../components/Register'
 
-const IndexPage: NextPage = () => (
+const RegisterPage: NextPage = () => (
   <Layout>
-      <Sign_in_up />
+      <Register />
   </Layout>
 )
 
-export default IndexPage
+export default RegisterPage

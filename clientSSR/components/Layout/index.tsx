@@ -3,7 +3,7 @@ import Header from '../Header';
 const Layout:React.FC = (props) => {
   
   return(
-    <div style={{margin: 20, padding: 20}}>
+    <div>
       <Header/>
       {props.children}
     </div>

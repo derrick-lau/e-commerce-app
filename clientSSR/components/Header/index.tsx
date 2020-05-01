@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './index.module.css'
 import Link from 'next/link'
 
 
 const Header: React.FC = () => {
+    const [isLoggedin, setisLoggedin] = useState(false)
 
+    useEffect(() => {
+        if(window.sessionStorage.getItem('token')) {
+            setisLoggedin(true)
+        }
+    }, [])
+
+    const handleLogout = () => {
+        window.sessionStorage.clear()
+        setisLoggedin(false)
+    }
+    
     return (
         <header className={styles.header}>
             <Link href={'/'} >
@@ -23,23 +35,15 @@ const Header: React.FC = () => {
                         Contact
                     </a>
                 </Link>
-                {true ? 
-                    <Link href={'/sign_in_up'} >
-                        <a className={styles.route}>
-                            Sign in
-                        </a>
+                {isLoggedin ? 
+                    <>
+                    <Link href={'/cart'} ><a className={styles.route}> Trolley img </a></Link>
+                    <Link href={'/wishList'} ><a className={styles.route}> Wish List img </a></Link>
+                    <Link href={'/login'} ><a className={styles.route} onClick={handleLogout}>Log out</a>
                     </Link>
+                    </>
                 : 
-                    <Link href={'/sign_in_up'} >
-                        <a className={styles.route}>
-                            Sign out
-                        </a>
-                    </Link>
-                }
-                {true ? 
-                    <Link href={'/cart'} ><a className={styles.route}> Cart </a></Link>
-                : 
-                    null
+                    <Link href={'/login'} ><a className={styles.route}>Log in</a></Link>
                 }
             </div>
         </header> 
