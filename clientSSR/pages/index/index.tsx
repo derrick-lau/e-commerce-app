@@ -19,36 +19,32 @@ IndexPage.getInitialProps = async () => {
     
   // ...fetch
 
-  return { menu:[
+  return { 
+    menu:[
     {
-        section: 'Processors',
-        imgLink: '',
+        storeName: 'Processors',
+        image: '',
         id: 1,
-        pageLink: 'store/processors'
     },
     {
-        section: 'Motherboards',
-        imgLink: '',
-        id: 2,
-        pageLink: 'store/motherboards'
+      storeName: 'Motherboards',
+      image: '',
+      id: 2,
     },
     {
-        section: 'Memory',
-        imgLink: '',
-        id: 3,
-        pageLink: 'store/memory'
+      storeName: 'Memory',
+      image: '',
+      id: 3,
     },
     {
-        section: 'Graphics Card',
-        imgLink: 'https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/graphic-cards/rtx-2080-super/geforce-rtx-2080-super-gallery-thumbnail-d-D.png',
-        id: 4,
-        pageLink: 'store/graphics'
+      storeName: 'Graphics Card',
+      image: 'https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/graphic-cards/rtx-2080-super/geforce-rtx-2080-super-gallery-thumbnail-d-D.png',
+      id: 4,
     },
     {
-        section: 'Cases and Coolings',
-        imgLink: '',
-        id: 5,
-        pageLink: 'store/cases&coolings'
+      storeName: 'Cases and Coolings',
+      image: '',
+      id: 5,
     }
   ]}
 }

@@ -5,9 +5,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 20;
-  padding: 20;
-  height: 70px;
+  padding: 3em;
+  padding-top: 2em;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -15,12 +14,20 @@
   background:linear-gradient(182deg,hsla(0,0%,100%,.4) 10%,hsla(0,0%,100%,.1) 57%);
 }
 
+.header img {
+  text-decoration: none;
+  width:3vw;
+  
+  margin-left: 2vw;
+  margin-top: 1vh;
+}
+
 
 
 .logo {
+  margin-top: 1vh;
     height: 100%;
-    width: 70px;
-    padding: 25px;
+    width: 3vw;
 }
 
 .routes {
@@ -34,8 +41,24 @@
 .route {
   color: rgb(68, 63, 63);
   text-decoration: none;
-  padding: 10px 15px;
+  padding: 1em;
+  margin-right: 2em;
   cursor: pointer;
+}
+
+.route:hover{
+  text-decoration: none;
+}
+
+.route h5 {
+  margin-top: 2vh;
+  color: rgb(68, 63, 63);
+  text-decoration: none;
+}
+
+.route img {
+  text-decoration: none;
+  width:3vw;
 }
 
 

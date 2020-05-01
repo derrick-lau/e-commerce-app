@@ -1,6 +1,5 @@
 export default interface Iroute {
-    section: string;
-    pageLink: string;
+    storeName: string;
     id: number;
-    imgLink: string;
+    image: string;
 }

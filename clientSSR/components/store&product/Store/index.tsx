@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.css'
 import Product from '../Product'
 import Istore from '../../abstractions/Istore'
 
-const Store: React.FC<Istore> = ({products, title}) => {
+const Store: React.FC<Istore> = ({products, storeName}) => {
+    const [getProducts, setGetProducts] = useState(products)
+
+    // for fiter
+    console.log(setGetProducts)
 
     return (
         
-        <main className={styles.storePreview}>
-            <h1>{title}</h1>
-            <section>
-                {products.map(({...props}) => (
+        <main className={styles.store}>
+            <h1 className={styles.title} >{storeName}</h1>
+            <section className={styles.products}>
+                {getProducts.map(({...props}) => (
                     <Product key={props.id} {...props}/>
                 ))}
             </section>
