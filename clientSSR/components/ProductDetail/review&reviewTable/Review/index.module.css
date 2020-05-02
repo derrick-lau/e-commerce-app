@@ -1,40 +1,12 @@
-.product {
+.review {
     width: 100%;
     display: flex;
     flex-direction: column;
-    height: 30vh;
-    align-items: center;
-    margin: 2%;
+    margin-top: 5vh;
 }
-.image {
-    cursor: pointer;
-    width: 100%;
-    height: 95%;
-    background-size: cover;
-    background-position: center;
-}
-  
-.footer {
-    width: 100%;
-    height: 5%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
+
+.review p {
+    font-size: 3vmin;
 }
 
 
-.name {
-    cursor: pointer;
-    width: 90%;
-    margin-bottom: 15px;
-    text-decoration: none;
-    color: black;
-}
-
-.name:hover {
-    text-decoration: none;
-}
-  
-.price {
-    width: 10%;
-}

@@ -11,23 +11,9 @@
     width: 100%;
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid rgb(203, 203, 203);
-    box-shadow: 1px 1px 1px rgb(195, 195, 195);
+    border-bottom: 1px solid rgb(192, 191, 191);
+    box-shadow: 1px 1px 1px rgb(171, 171, 171);
     margin: 2em 0;
     margin-top: 1em;
 }
 
-.custom_input_div label {
-    color: black;
-    font-size: 1.3em;
-    font-weight: normal;
-    pointer-events: none;
-    left: 1vw;
-    transition: 300ms ease all;
-}
-
-.resize {
-    top: -14px;
-    font-size: 120px;
-    color: black;
-}

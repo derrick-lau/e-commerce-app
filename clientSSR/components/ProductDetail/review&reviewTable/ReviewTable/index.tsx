@@ -7,12 +7,12 @@ import IreviewTable from '../../../abstractions/IreviewTable';
 const ReviewTable: React.FC<IreviewTable> = ({reviews}) => {
 
     return (
-            <section className={styles.products}>
-                {reviews.map(({...props}) => (
-                    <Review key={props.id} {...props}/>
-                ))}
-            </section>
-
+        <section className={styles.ReviewTable}>
+            <p style={{fontSize:"5.5vmin"}}>Product reviews</p>
+            {reviews.map(({...props}) => (
+                <Review key={props.id} {...props}/>
+            ))}
+        </section>
     )
 }
 

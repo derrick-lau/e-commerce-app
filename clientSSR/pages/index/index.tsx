@@ -2,15 +2,16 @@ import * as React from 'react'
 import { NextPage } from 'next'
 import styles from './index.module.css'
 import Menu from '../../components/menu&route/Menu'
-import Layout from '../../components/Layout'
+
 import Imenu from '../../components/abstractions/Imenu'
+import Layout from '../../components/Layout'
 
 const IndexPage: NextPage<Imenu> = (props) => (
 
   <Layout>
-    <main className={styles.homepage}>
-      <Menu menu={props.menu}/>
-    </main>
+      <main className={styles.homepage}>
+        <Menu menu={props.menu}/>
+      </main>
   </Layout>
 )
 

@@ -21,7 +21,7 @@ const Product: React.FC<Iproduct> = ({id, productName, image, price, isInStock})
                     <Link href={`/product/${productName}?id=${id}`} >
                         <a href={`/product/${productName}?id=${id}`} className={styles.name} >{productName}</a>
                     </Link>
-                    <span className={styles.price}>{price}</span>
+                    <span className={styles.price}>£{price}</span>
                 </footer>
             </section>
         ) 

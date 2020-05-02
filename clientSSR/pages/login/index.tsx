@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { NextPage } from 'next'
-import Layout from '../../components/Layout'
 import Login from '../../components/Login'
+import Layout from '../../components/Layout'
 
 const LoginPage: NextPage = () => (
   <Layout>
-      <Login />
+    <Login />
   </Layout>
 )
 

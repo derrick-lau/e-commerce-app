@@ -9,21 +9,21 @@ class User(db.Model):
     username = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     isAdmin = db.Column(db.Boolean, unique=False, default=True)
-    fullname = db.Column(db.String(100), default="User")
+    name = db.Column(db.String(100), default="User"+id)
     address = db.Column(db.String(200), default="")
     reviews = db.relationship("Review", lazy="dynamic")
 
-    def __init__(self, username, password, fullname, address):
+    def __init__(self, username, password, name, address):
         self.username = username
         self.password = password
-        self.fullname = fullname
+        self.name = name
         self.address = address
 
     def json(self):
         return {
             "id": self.id, 
             "username": self.username,
-            "fullname": self.fullname, 
+            "name": self.name, 
             "address": self.address
         }
 

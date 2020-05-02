@@ -20,6 +20,7 @@ class Review(db.Model):
     def json(self):
         return {
             "id": self.id,
+            "name": user.findById(self.userId).name,
             "content": self.content,
             "rate": self.rate
         }

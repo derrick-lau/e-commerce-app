@@ -1,17 +1,18 @@
 .store {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
     padding: 3em;
 }
   
 .title {
-    font-size: 28px;
-    margin-bottom: 25px;
+    font-size: 3vmin;
+    margin: 1em;
 }
   
 .products {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2em;
 }
   

@@ -1,19 +1,23 @@
 import * as React from 'react'
 import { NextPage } from 'next'
-import Layout from '../../components/Layout';
 import Iproduct from '../../components/abstractions/Iproduct';
 import ProductDetail from '../../components/ProductDetail';
+import Layout from '../../components/Layout';
+import ReviewTable from '../../components/ProductDetail/review&reviewTable/ReviewTable';
 
 const shopPage: NextPage<Iproduct> = (props) => (
     <Layout>
-        <main>  
+        <main style={{display:"flex" , flexDirection:"column"}}>  
             <ProductDetail 
                 id={props.id} 
                 productName={props.productName} 
                 price={props.price} 
                 image={props.image}
-                reviews={props.reviews}
             />
+            {props.reviews?(
+                <ReviewTable reviews={props.reviews}/>)
+                :<>No reviews on this product</>
+            }
         </main>
     </Layout>
 )
@@ -26,7 +30,7 @@ shopPage.getInitialProps = async ({query}) => {
                 image: "https://www.amd.com/system/files/2020-02/312735-ryzen-3900x-pib-right-facing-withfan-bg-1260x709.jpg",
                 productName: "cpu1",
                 price: 15.0,
-                reviews: [{id:1, rate:5, content:"Hiiiiiii"}]
+                reviews: [{id:1, rate:5, content:"Hiiiiiii", name:"user1"},{id:1, rate:5, content:"Hiiiiiii", name:"user1"}]
             }
 }
 

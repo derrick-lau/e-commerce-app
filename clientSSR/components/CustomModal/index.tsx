@@ -8,20 +8,20 @@ interface Imodal {
     logo: string
 }
 const CustomModal:React.FC<Imodal> = ({handleSave, action, logo}) => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [display, setDisplay] = useState(false);
+    const close = () => setDisplay(false);
+    const Display = () => setDisplay(true);
   
     return (
       <>
-        <Image alt={logo} src={logo} style={{width:"3vw", marginTop:"1.5vh", cursor: "pointer"}} onClick={handleShow} />
-        <Modal show={show} onHide={handleClose}>
+        <Image alt={logo} src={logo} style={{width:"3vw", marginTop:"1.5vh", cursor: "pointer"}} onClick={Display} />
+        <Modal show={display} onHide={close}>
           <Modal.Header closeButton>
             <Modal.Title>Confirmation</Modal.Title>
           </Modal.Header>
-            <Modal.Body>Are you sure ?</Modal.Body>
+            <Modal.Body>Are you sure you want to {action} ?</Modal.Body>
           <Modal.Footer>
-            <Custom_button onClick={handleClose}>
+            <Custom_button onClick={close}>
               Close
             </Custom_button>
             <Custom_button  onClick={handleSave}>

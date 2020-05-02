@@ -14,11 +14,10 @@ class SessionTrolleyProduct():
         return {
             "productId":self.productId,
             "productName":product.productName,
-            "store":product.store.storeName,
+            "image":product.store.image,
             "price":product.price,
             "quantity":self.quantity,
             "total":product.price * self.quantity,
-            "userId": self.userId
     }
 
     @classmethod 

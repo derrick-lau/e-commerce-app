@@ -26,20 +26,15 @@ const Header: React.FC = () => {
                 </a>
             </Link>
             <div className={styles.routes}>
-                <Link href={'/'} >
-                    <a href={'/'} className={styles.route}>
-                        <h5>Home</h5>
-                    </a>
-                </Link>
-                <Link href={'/contact'} >
-                    <a href={'/contact'} className={styles.route}>
-                        <h5>Contact</h5>
-                    </a>
-                </Link>
                 {isLoggedin ? 
                     <>
-                    <Link href={'/cart'} >
-                        <a href={'/cart'} className={styles.route}> 
+                    <Link href={'/order'} >
+                        <a href={'/order'} className={styles.route}>
+                            <p>My Order</p>
+                        </a>
+                    </Link>
+                    <Link href={'/trolley'} >
+                        <a href={'/trolley'} className={styles.route}> 
                             <img alt="computer component store trolley" src="/trolley.png"/> 
                         </a>
                     </Link>
@@ -52,7 +47,7 @@ const Header: React.FC = () => {
                     
                     </>
                 : 
-                    <Link href={'/login'} ><a href={'/login'} className={styles.route}>Log in</a></Link>
+                    <Link href={'/login'} ><a href={'/login'} className={styles.route}><p>Log in</p></a></Link>
                 }
             </div>
         </header> 
