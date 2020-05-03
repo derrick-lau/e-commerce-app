@@ -1,5 +1,5 @@
 import React from 'react'
-import Ireview from '../../../abstractions/Ireview';
+import Ireview from '../../abstractions/Ireview';
 import styles from './index.module.css'
 
 const Review: React.FC<Ireview> = ({rate, content, name}) => {

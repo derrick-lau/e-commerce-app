@@ -40,7 +40,7 @@ const Header: React.FC = () => {
                     </Link>
                     <Link href={'/wishList'} >
                         <a href={'/wishList'} className={styles.route} > 
-                            <img alt="computer component store wishlist" src="/wishlist.png" style={{width:"2.5vw", marginTop:"1.5vh", cursor: "pointer"}}/> 
+                            <img alt="computer component store wishlist" src="/wishlist.png"/> 
                         </a>
                     </Link>
                     <CustomModal logo={"/logout.png"} action={<>Logout</>}handleSave={handleLogout}>Log out</CustomModal>

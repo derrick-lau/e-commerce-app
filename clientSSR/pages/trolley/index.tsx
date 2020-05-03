@@ -3,12 +3,10 @@ import { NextPage } from 'next'
 import Layout from '../../components/Layout'
 import Trolley from '../../components/trolley&trolleyProducts/Trolley'
 
-const IndexPage: NextPage = () => (
+const TrolleyPage: NextPage = () => (
   <Layout>
-    <main>
-      <Trolley/>
-    </main>
+    <Trolley/>
   </Layout>
 )
 
-export default IndexPage
+export default TrolleyPage

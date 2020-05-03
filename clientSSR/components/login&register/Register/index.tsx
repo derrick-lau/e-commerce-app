@@ -1,8 +1,10 @@
 
 import styles from './index.module.css'
-import Custom_input from '../Custom_input'
-import Custom_button from '../Custom_button'
+import Custom_input from '../../Custom_input'
+import Custom_button from '../../Custom_button'
+import FormLayout from '../../custom_form/FormLayout'
 import { useState } from 'react';
+import FormTitle from '../../custom_form/FormTitle';
 interface Isign {
 
 }
@@ -34,8 +36,8 @@ const Login: React.FC<Isign> = () => {
     };
 
     return (
-        <section className={styles.loginSection}>
-            <span>Sign in with your email and password</span>
+        <FormLayout>
+            <FormTitle>Register with your email and password</FormTitle>
             <form className={styles.loginForm} onSubmit={handleSubmit}>
                 <Custom_input label={null} 
                     type='email' 
@@ -61,7 +63,7 @@ const Login: React.FC<Isign> = () => {
                     </Custom_button>
                 </div>
             </form>
-        </section>  
+        </FormLayout>  
     )
 }
 

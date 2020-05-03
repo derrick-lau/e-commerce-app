@@ -8,7 +8,7 @@ export default interface Iproduct {
     isInStock?: boolean;
     reviews?: Ireview[];
     store?:string;
-    quantity?:string,
+    quantity?:number,
     total?:number,
     orderId?:number
 }

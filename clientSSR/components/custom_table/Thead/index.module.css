@@ -1,0 +1,7 @@
+.tabelHeader {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgrey;
+}

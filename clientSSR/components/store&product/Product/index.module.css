@@ -19,7 +19,7 @@
     height: 1vh;
     display: flex;
     justify-content: space-between;
-    font-size: 1.5em;
+    font-size: 2.8vmin;
     margin-bottom: 5vh;
 }
 
@@ -27,7 +27,7 @@
 .name {
     cursor: pointer;
     width: 90%;
-    margin-bottom: 15px;
+    margin-bottom: 1em;
     text-decoration: none;
     color: black;
 }

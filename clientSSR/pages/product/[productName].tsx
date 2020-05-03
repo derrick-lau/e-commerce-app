@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import Iproduct from '../../components/abstractions/Iproduct';
 import ProductDetail from '../../components/ProductDetail';
 import Layout from '../../components/Layout';
-import ReviewTable from '../../components/ProductDetail/review&reviewTable/ReviewTable';
+import ReviewTable from '../../components/review&reviewTable/ReviewTable';
 
 const shopPage: NextPage<Iproduct> = (props) => (
     <Layout>
@@ -16,7 +16,8 @@ const shopPage: NextPage<Iproduct> = (props) => (
             />
             {props.reviews?(
                 <ReviewTable reviews={props.reviews}/>)
-                :<>No reviews on this product</>
+            :
+                null
             }
         </main>
     </Layout>

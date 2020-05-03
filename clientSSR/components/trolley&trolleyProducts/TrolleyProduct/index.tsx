@@ -2,6 +2,7 @@ import React from 'react'
 import ItrolleyProduct from '../../abstractions/ItrolleyProduct';
 import styles from './index.module.css'
 import CustomModal from '../../CustomModal';
+import Tbody from '../../custom_table/Tbody';
 
 const TrolleyProduct: React.FC<ItrolleyProduct> = ({productId, productName, image, quantity, total}) => {
     console.log(productId)
@@ -9,23 +10,23 @@ const TrolleyProduct: React.FC<ItrolleyProduct> = ({productId, productName, imag
     const addItem =() => {}
     const clearItem =() => {}
     return (
-        <div className={styles.checkout_item}>
-            <div className={styles.image_container}>
+        <Tbody>
+            <tr className={styles.image_container}>
                 <img src={image} alt='item' />
-            </div>
-            <span className={styles.name}>{productName}</span>
-            <span className={styles.quantity}>
-                <div className={styles.arrow} onClick={() => removeItem()}>
+            </tr>
+            <tr className={styles.name}>{productName}</tr>
+            <tr className={styles.quantity}>
+                <td className={styles.arrow} onClick={() => removeItem()}>
                     &#10094;
-                </div>
-                <span className={styles.value}>{quantity}</span>
-                <div className={styles.arrow} onClick={() => addItem()}>
+                </td>
+                <td className={styles.value}>{quantity}</td>
+                <td className={styles.arrow} onClick={() => addItem()}>
                     &#10095;
-                </div>
-            </span>
-            <span className={styles.price}>{total}</span>
-            <CustomModal action={<>remove</>} logo={"&#10005"}handleSave={() => clearItem()} />
-        </div>
+                </td>
+            </tr>
+            <tr className={styles.price}>{total}</tr>
+            <CustomModal action={<>remove</>} logo={"/cross.png"}handleSave={() => clearItem()} />
+        </Tbody>
     )
 }
 

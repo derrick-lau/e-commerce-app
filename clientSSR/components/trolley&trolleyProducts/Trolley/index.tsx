@@ -2,11 +2,24 @@ import React, { useState, useEffect } from 'react'
 import styles from './index.module.css'
 import TrolleyProduct from '../TrolleyProduct';
 import Custom_button from '../../Custom_button';
+import ItrolleyProduct from '../../abstractions/ItrolleyProduct';
+import TableLayout from '../../custom_table/TableLayout';
+import Tr_Th from '../../custom_table/Tr_Th';
+import Thead from '../../custom_table/Thead';
 
-const Store: React.FC = () => {
+const Trolley: React.FC = () => {
 
-    const [trolley, setTrolley] = useState([{productId:0, productName:"No product", image:"No product", quantity:0, total:0}])
-    let sum = 0
+    const [trolley, setTrolley] = useState<ItrolleyProduct[]>([])
+    const [sum, setSum] = useState<number>(0)
+
+    useEffect(() => {
+      let total = 0;
+      trolley.forEach((TrolleyProduct) => {
+        total += TrolleyProduct.total
+      })
+      setSum(total)
+    })
+
     useEffect(() => {
         setTrolley([
             {
@@ -23,38 +36,31 @@ const Store: React.FC = () => {
             total:65.0 
         }
     ])
-
     }, [])
     
     return (
-        <div className={styles.checkout_page}>
-        <div className={styles.checkout_header}>
-          <div className={styles.header_block}>
-            <span>Product</span>
-          </div>
-          <div className={styles.header_block}>
-            <span>Name</span>
-          </div>
-          <div className={styles.header_block}>
-            <span>Quantity</span>
-          </div>
-          <div className={styles.header_block}>
-            <span>Price</span>
-          </div>
-          <div className={styles.header_block}>
-            <span>Remove</span>
-          </div>
-        </div>
-        {trolley.map(props => {
-            sum += props.total
+      <main className={styles.tableMain}>
+        <TableLayout>
+          <Thead>
+            <Tr_Th>Product</Tr_Th>
+            <Tr_Th>Name</Tr_Th>
+            <Tr_Th>Quantity</Tr_Th>
+            <Tr_Th>Price</Tr_Th>
+            <Tr_Th>Remove</Tr_Th>
+          </Thead>
+          {trolley.length > 0 ? trolley.map(props => {
             return(<TrolleyProduct key={props.productId} {...props} />)
-        })}
-        <div className={styles.total}>TOTAL: £{sum}</div>
-        <Custom_button style={{marginTop:"3vh", alignSelf: "flex-end"}}>Checkout</Custom_button>
-      </div>  
+          })
+          :
+            <> No product in the trolley</>
+          }
+          <div className={styles.total}>TOTAL: £{sum}</div>
+          <Custom_button onClick={()=> window.location.pathname="/checkout"} style={{marginTop:"3vh", alignSelf: "flex-end"}}> Go to checkout </Custom_button>
+        </TableLayout> 
+      </main> 
     )
 }
 
 
 
-export default Store;
+export default Trolley;

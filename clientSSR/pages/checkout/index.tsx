@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { NextPage } from 'next'
-import Login from '../../components/login&register/Login'
+import Checkout from '../../components/Checkout'
 import Layout from '../../components/Layout'
 
-const LoginPage: NextPage = () => (
+const checkoutPage: NextPage = () => (
   <Layout>
-    <Login />
+    <Checkout/>
   </Layout>
 )
 
-export default LoginPage
+export default checkoutPage

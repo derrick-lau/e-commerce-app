@@ -1,0 +1,29 @@
+
+
+
+.id,.createAt, .quantity, .address {
+    display: flex;
+    justify-content: center;
+}
+
+.id {
+    width: 15%;
+    margin-right: 5%;
+}
+
+.createAt {
+    width: 30%;
+    margin-left: 2%;
+}
+
+.address {
+    width: 11.5%;
+    justify-content: flex-end;
+}
+  
+.quantity {
+    width: 30%;
+    flex-direction: column;
+    margin-left: 2%;
+} 
+
