@@ -1,7 +1,7 @@
 
 import Link from 'next/link'
 import styles from './index.module.css'
-import Iroute from '../../abstractions/Iroute';
+import Iroute from '../../../abstractions/Iroute';
 
 const Route: React.FC<Iroute> = ({id, storeName, image}) => (
     <section id={id.toString()} className={styles.route} >

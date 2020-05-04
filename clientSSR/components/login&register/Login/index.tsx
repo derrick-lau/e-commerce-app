@@ -5,24 +5,26 @@ import Custom_button from '../../Custom_button'
 import FormLayout from '../../custom_form/FormLayout'
 import { useState } from 'react';
 import FormTitle from '../../custom_form/FormTitle';
-interface Isign {
+import { LoginApi } from '../../../api';
 
-}
 
-const Login: React.FC<Isign> = () => {
+const Login: React.FC = () => {
     const [userCredentials, setCredentials] = useState({
         email: '',
         password: ''
     });
     
-    const SaveTokenToSession = (token:string) => window.sessionStorage.setItem('token', token)
-    
     const handleSubmit = async (event:React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // const { email, password } = userCredentials;
-        //fetch
-        SaveTokenToSession("123")
-        window.location.pathname = "/"
+        const { email, password } = userCredentials;
+        try {
+            const res = await LoginApi.post(email, password);
+            window.sessionStorage.setItem('token', res.refreshToken)
+            window.location.pathname = "/"
+        } catch(e) {
+            alert(e.response? e.response.data.message: e)
+        }
+        
     };
     
     const handleChange = (event:React.ChangeEvent<HTMLFormElement>) => {
@@ -36,6 +38,7 @@ const Login: React.FC<Isign> = () => {
             <form className={styles.loginForm} onSubmit={handleSubmit}>
                 <Custom_input label={null} 
                     type='email' 
+                    name='email'
                     onChange={handleChange} 
                     autoComplete={"email"} 
                     placeholder='Email' 
@@ -43,7 +46,8 @@ const Login: React.FC<Isign> = () => {
                 />
                 <Custom_input 
                     label={null} 
-                    type='password'  
+                    type='password'
+                    name='password'  
                     onChange={handleChange} 
                     placeholder='Password' 
                     autoComplete="off" 
@@ -53,11 +57,11 @@ const Login: React.FC<Isign> = () => {
                     <Custom_button type='submit'> 
                         Sign in 
                     </Custom_button>
-                    <Custom_button style={{backgroundColor: "grey"}} onClick={()=>window.location.pathname = "/register"}> 
-                        Go to Register 
-                    </Custom_button>
                 </div>
             </form>
+            <Custom_button style={{backgroundColor: "grey"}} onClick={()=>window.location.pathname = "/register"}> 
+                Go to Register 
+            </Custom_button>
         </FormLayout>  
     )
 }

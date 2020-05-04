@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './index.module.css'
 import Review from '../Review';
-import IreviewTable from '../../abstractions/IreviewTable';
+import IreviewTable from '../../../abstractions/IreviewTable';
 
 
 const ReviewTable: React.FC<IreviewTable> = ({reviews}) => {

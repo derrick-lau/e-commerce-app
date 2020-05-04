@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './index.module.css'
 import CustomModal from '../../CustomModal/Confirmation';
 import Tbody from '../../custom_table/Tbody';
-import Iproduct from '../../abstractions/Iproduct';
+import Iproduct from '../../../abstractions/Iproduct';
 
 const WishListProduct: React.FC<Iproduct> = ({id, productName, image, price}) => {
     console.log(id)

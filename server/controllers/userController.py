@@ -21,7 +21,7 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "name", type=str, required=True, help="please enter a name"
+    "name", type=str, required=False, help="please enter a name"
 )
 
 parser.add_argument(
@@ -74,7 +74,9 @@ class UserSigninController(Resource):
 
         user = User.findByUsername(props["username"])
         ## check passward
+        print(user, props["password"])
         if user and user.checkPassword(props["password"]):
+            print(props["password"],user.checkPassword(props["password"]))
             accessToken = create_access_token(identity=user.id, fresh=True)
             refreshToken = create_refresh_token(user.id)
             return {"accessToken": accessToken, "refreshToken": refreshToken}, 200

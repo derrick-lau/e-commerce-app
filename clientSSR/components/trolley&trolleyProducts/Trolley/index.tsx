@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styles from './index.module.css'
 import TrolleyProduct from '../TrolleyProduct';
 import Custom_button from '../../Custom_button';
-import ItrolleyProduct from '../../abstractions/ItrolleyProduct';
+import ItrolleyProduct from '../../../abstractions/ItrolleyProduct';
 import TableLayout from '../../custom_table/TableLayout';
 import Tr_Th from '../../custom_table/Tr_Th';
 import Thead from '../../custom_table/Thead';

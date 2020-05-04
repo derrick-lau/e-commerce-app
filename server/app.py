@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS, cross_origin
 
 from db import db
 from blacklist import BLACKLIST
@@ -26,6 +27,7 @@ app.config["JWT_BLACKLIST_TOKEN_CHECKS"] = [
 ]  
 app.secret_key = "forka"  
 api = Api(app)
+CORS(app)
 
 bcrypt = Bcrypt(app)
 
@@ -118,9 +120,9 @@ api.add_resource(ExistingOrderController, "/order/<int:orderId>")
 api.add_resource(PaymentController, "/payment")
 api.add_resource(ReviewController, "/review")
 api.add_resource(UserRegisterController, "/register")
-api.add_resource(UserSigninController, "/signin")
+api.add_resource(UserSigninController, "/login")
 api.add_resource(TokenRefreshController, "/refresh")
-api.add_resource(UserSignoutController, "/signout")
+api.add_resource(UserSignoutController, "/logout")
 api.add_resource(UserController, "/user/<int:user_id>")
 
 if __name__ == "__main__":

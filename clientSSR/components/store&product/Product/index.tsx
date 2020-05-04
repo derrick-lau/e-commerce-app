@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './index.module.css'
-import Iproduct from '../../abstractions/Iproduct';
+import Iproduct from '../../../abstractions/Iproduct';
 import Link from 'next/link';
 
 const Product: React.FC<Iproduct> = ({id, productName, image, price, isInStock}) => {

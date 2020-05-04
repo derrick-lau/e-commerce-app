@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './index.module.css'
 import Tbody from '../../custom_table/Tbody';
-import Iorder from '../../abstractions/Iorder';
-import ModalForm from '../../CustomModal/ModalForm';
+import Iorder from '../../../abstractions/Iorder';
+import WriteReviewModal from '../../CustomModal/WriteReviewModal';
 
 const Order: React.FC<Iorder> = ({id, createAt, orderProducts}) =>  (
   
@@ -20,7 +20,7 @@ const Order: React.FC<Iorder> = ({id, createAt, orderProducts}) =>  (
           }
           </>
       </tr>
-      <tr className={styles.address}><td>{<ModalForm logo={"/logo.png"} title={<>Write a review</>} handleSave={()=>{}}/>}</td></tr>
+      <tr className={styles.address}><td><WriteReviewModal productId={id}/></td></tr>
   </Tbody>
 )
 

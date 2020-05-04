@@ -3,7 +3,7 @@ import styles from './index.module.css'
 import TableLayout from '../../custom_table/TableLayout';
 import Tr_Th from '../../custom_table/Tr_Th';
 import Thead from '../../custom_table/Thead';
-import Iorder from '../../abstractions/Iorder';
+import Iorder from '../../../abstractions/Iorder';
 import Order from '../Order';
 import Table_title from '../../custom_table/Table_title';
 

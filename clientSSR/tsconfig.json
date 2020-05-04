@@ -19,5 +19,5 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "components/abstractions/Iroute.ts", "components/context/MenuContext/index.ts", "components/context/CurrentRouteContext/index.js", "components/store&product/Store/index.tsx", "pages/_app.jsx", "components/menu&route/Route/index.tsx", "components/menu&route/Menu/index.tsx", "components/Custom_input/index.jsx", "components/Custom_input/index.jsx", "components/FormLayout/index.jsx", "components/FormLayout/index.jsx"]
+  "include": ["**/*.ts", "**/*.tsx", "abstractions/Iroute.ts", "components/context/MenuContext/index.ts", "components/context/CurrentRouteContext/index.js", "components/store&product/Store/index.tsx", "pages/_app.jsx", "components/menu&route/Route/index.tsx", "components/menu&route/Menu/index.tsx", "components/Custom_input/index.jsx", "components/Custom_input/index.jsx", "components/FormLayout/index.jsx", "components/FormLayout/index.jsx"]
 }

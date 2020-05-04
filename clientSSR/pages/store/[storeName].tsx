@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { NextPage } from 'next'
 import Store from '../../components/store&product/Store';
-import Istore from '../../components/abstractions/Istore';
+import Istore from '../../abstractions/Istore';
 import Layout from '../../components/Layout';
 
 const shopPage: NextPage<Istore> = (props) => (

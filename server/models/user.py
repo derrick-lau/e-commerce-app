@@ -9,7 +9,7 @@ class User(db.Model):
     username = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     isAdmin = db.Column(db.Boolean, unique=False, default=True)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), default="User")
     address = db.Column(db.String(200), default="")
     reviews = db.relationship("Review", lazy="dynamic")
 

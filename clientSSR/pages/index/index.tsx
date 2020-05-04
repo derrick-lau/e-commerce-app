@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import styles from './index.module.css'
 import Menu from '../../components/menu&route/Menu'
 
-import Imenu from '../../components/abstractions/Imenu'
+import Imenu from '../../abstractions/Imenu'
 import Layout from '../../components/Layout'
 
 const IndexPage: NextPage<Imenu> = (props) => (

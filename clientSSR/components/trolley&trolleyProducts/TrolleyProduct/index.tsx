@@ -1,5 +1,5 @@
 import React from 'react'
-import ItrolleyProduct from '../../abstractions/ItrolleyProduct';
+import ItrolleyProduct from '../../../abstractions/ItrolleyProduct';
 import styles from './index.module.css'
 import CustomModal from '../../CustomModal/Confirmation';
 import Tbody from '../../custom_table/Tbody';

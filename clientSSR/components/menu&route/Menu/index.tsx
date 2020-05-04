@@ -1,5 +1,5 @@
 import Route from '../Route';
-import Imenu from '../../abstractions/Imenu';
+import Imenu from '../../../abstractions/Imenu';
 
 
 const Menu: React.FC<Imenu> = ({menu}) => (

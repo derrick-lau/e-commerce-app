@@ -1,6 +1,6 @@
 import styles from './index.module.css'
 import Product from '../Product'
-import Istore from '../../abstractions/Istore'
+import Istore from '../../../abstractions/Istore'
 
 const Store: React.FC<Istore> = ({products, storeName}) => (
 

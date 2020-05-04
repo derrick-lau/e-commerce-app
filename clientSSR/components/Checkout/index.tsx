@@ -3,10 +3,10 @@ import styles from './index.module.css'
 import Custom_input from '../Custom_input'
 import Custom_button from '../Custom_button'
 import { useState, useEffect } from 'react';
-import ItrolleyProduct from '../abstractions/ItrolleyProduct';
+import ItrolleyProduct from '../../abstractions/ItrolleyProduct';
 import FormLayout from '../custom_form/FormLayout';
 import FormTitle from '../custom_form/FormTitle';
-import InewOrder from '../abstractions/InewOrder';
+import InewOrder from '../../abstractions/InewOrder';
 import {useStripe, CardElement, useElements} from '@stripe/react-stripe-js';
 
 
