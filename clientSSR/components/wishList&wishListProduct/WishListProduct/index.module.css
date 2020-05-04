@@ -1,0 +1,19 @@
+
+.image_container {
+      width: 23%;
+      padding-right: 1.5vw;
+      margin-right: 9vw;
+}
+.image_container img {
+    width: 100%;
+    height: auto;
+}
+
+.name, .price {
+    width: 28%;
+}
+
+  
+.remove_button {
+    cursor: pointer;
+}

@@ -1,5 +1,9 @@
 
 export default interface InewOrder {
+    fullname:string;
     address:string;
-    paymentMethod:string;
+    cardName:string;
+    cardNumber:string;
+    expirationDate:string;
+    CVV:string;
 }

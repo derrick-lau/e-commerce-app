@@ -6,6 +6,7 @@ import ItrolleyProduct from '../../abstractions/ItrolleyProduct';
 import TableLayout from '../../custom_table/TableLayout';
 import Tr_Th from '../../custom_table/Tr_Th';
 import Thead from '../../custom_table/Thead';
+import Table_title from '../../custom_table/Table_title';
 
 const Trolley: React.FC = () => {
 
@@ -40,6 +41,7 @@ const Trolley: React.FC = () => {
     
     return (
       <main className={styles.tableMain}>
+        <Table_title>Trolley</Table_title>
         <TableLayout>
           <Thead>
             <Tr_Th>Product</Tr_Th>
@@ -52,11 +54,15 @@ const Trolley: React.FC = () => {
             return(<TrolleyProduct key={props.productId} {...props} />)
           })
           :
-            <> No product in the trolley</>
+            null
           }
-          <div className={styles.total}>TOTAL: £{sum}</div>
-          <Custom_button onClick={()=> window.location.pathname="/checkout"} style={{marginTop:"3vh", alignSelf: "flex-end"}}> Go to checkout </Custom_button>
         </TableLayout> 
+        <div className={styles.end}>
+          <div className={styles.total}>TOTAL: £{sum}</div>
+          <Custom_button onClick={()=> window.location.pathname="/checkout"} style={{marginTop:"3vh", alignSelf: "flex-end"}}> 
+            Go to checkout 
+          </Custom_button>
+        </div>
       </main> 
     )
 }

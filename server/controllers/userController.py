@@ -21,7 +21,7 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "fullname", type=str, required=False, help="please enter a fullname"
+    "name", type=str, required=True, help="please enter a name"
 )
 
 parser.add_argument(

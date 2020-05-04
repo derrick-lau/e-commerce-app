@@ -5,13 +5,14 @@ import Tr_Th from '../../custom_table/Tr_Th';
 import Thead from '../../custom_table/Thead';
 import Iorder from '../../abstractions/Iorder';
 import Order from '../Order';
+import Table_title from '../../custom_table/Table_title';
 
 const OrderTable: React.FC = () => {
 
-    const [trolley, setTrolley] = useState<Iorder[]>([])
+    const [orderTable, setOrderTable] = useState<Iorder[]>([])
 
     useEffect(() => {
-        setTrolley([{
+      setOrderTable([{
           id:1,
           createAt:"2029292-22882",
           address:"adress",
@@ -35,18 +36,19 @@ const OrderTable: React.FC = () => {
     
     return (
       <main className={styles.tableMain}>
+        <Table_title>Order</Table_title>
         <TableLayout>
           <Thead>
             <Tr_Th>Order ID</Tr_Th>
             <Tr_Th>Created Date</Tr_Th>
             <Tr_Th>Products</Tr_Th>
-            <Tr_Th>Address</Tr_Th>
+            <Tr_Th>Write a review</Tr_Th>
           </Thead>
-          {trolley.length > 0 ? trolley.map(props => {
+          {orderTable.length > 0 ? orderTable.map(props => {
             return(<Order key={props.id} {...props} />)
           })
           :
-            <> No product in the trolley</>
+            null
           }
         </TableLayout> 
       </main> 

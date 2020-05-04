@@ -11,6 +11,7 @@ const shopPage: NextPage<Iproduct> = (props) => (
             <ProductDetail 
                 id={props.id} 
                 productName={props.productName} 
+                description={props.description}
                 price={props.price} 
                 image={props.image}
             />
@@ -31,6 +32,7 @@ shopPage.getInitialProps = async ({query}) => {
                 image: "https://www.amd.com/system/files/2020-02/312735-ryzen-3900x-pib-right-facing-withfan-bg-1260x709.jpg",
                 productName: "cpu1",
                 price: 15.0,
+                description:"desription",
                 reviews: [{id:1, rate:5, content:"Hiiiiiii", name:"user1"},{id:1, rate:5, content:"Hiiiiiii", name:"user1"}]
             }
 }

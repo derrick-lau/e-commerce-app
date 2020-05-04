@@ -5,6 +5,7 @@ export default interface Iproduct {
     productName:string;
     image?:string;
     price:number;
+    description?:string
     isInStock?: boolean;
     reviews?: Ireview[];
     store?:string;

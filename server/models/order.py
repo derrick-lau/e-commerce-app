@@ -9,7 +9,6 @@ class Order(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey("users.id"))
     createAt = db.Column(db.String, default=datetime.datetime.utcnow)
     address = db.Column(db.String)
-    payment = db.relationship("Payment", lazy="dynamic")
     orderProducts = db.relationship("OrderProduct", lazy="dynamic")
 
     def __init__(self, userId, address):
@@ -17,14 +16,10 @@ class Order(db.Model):
         self.address = address
 
     def json(self):
-        payment1 = self.payment.first()
-        if not self.payment.first() == None:
-            payment1 = payment1.json()
         return {
             "id": self.id,
             "userId": self.userId,
             "createAt": self.createAt,
-            "payment": payment1,
             "address":self.address,
             "orderProducts": [orderProduct.json() for orderProduct in self.orderProducts.all()],
         }

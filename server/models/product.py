@@ -5,6 +5,7 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     productName = db.Column(db.String(100), unique=True)
+    description = db.Column(db.String)
     price = db.Column(db.Float(precision=2))
     image = db.Column(db.String)
 
@@ -13,8 +14,9 @@ class Product(db.Model):
     isInStock = db.Column(db.Boolean, unique=False, default=True)
     reviews = db.relationship("Review", lazy="dynamic")
 
-    def __init__(self, productName, price, image, storeId, isInStock):
+    def __init__(self, productName, description, price, image, storeId, isInStock):
         self.productName = productName
+        self.description = description
         self.price = price
         self.image = image
         self.storeId = storeId
@@ -26,6 +28,7 @@ class Product(db.Model):
             "store": self.store.findById(self.storeId).jsonWithoutProducts(),
             "image": self.image,
             "productName": self.productName,
+            "description":self.description,
             "price": self.price,
             "isInStock": self.isInStock,
             "reviews": [review.json() for review in self.reviews.all()]

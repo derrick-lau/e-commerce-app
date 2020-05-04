@@ -1,6 +1,5 @@
 .tabel {
     width: 88%;
-    min-height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;

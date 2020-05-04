@@ -25,6 +25,10 @@ class ProductController(Resource):
     )
 
     parser.add_argument(
+        "description", type=str, required=True, help="Every product needs a description."
+    )
+
+    parser.add_argument(
         "isInStock", type=bool, required=True, help="Every product needs a isInStock."
     )
 
@@ -80,6 +84,7 @@ class ProductController(Resource):
             product.price = props["price"]
             product.image = props["image"]
             product.isInStock = props["isInStock"]
+            product.description = props["description"]
         else:
             product = Product(name, **props)
 

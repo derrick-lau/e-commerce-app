@@ -24,11 +24,6 @@ const Login: React.FC<Isign> = () => {
         SaveTokenToSession("123")
         window.location.pathname = "/"
     };
-
-    const handleRegister = async (event:React.MouseEvent) => {
-        event.preventDefault();
-        window.location.pathname = "/register"
-    };
     
     const handleChange = (event:React.ChangeEvent<HTMLFormElement>) => {
         const { value, name } = event.target;
@@ -58,8 +53,8 @@ const Login: React.FC<Isign> = () => {
                     <Custom_button type='submit'> 
                         Sign in 
                     </Custom_button>
-                    <Custom_button style={{backgroundColor: "grey"}} onClick={handleRegister}> 
-                        Register 
+                    <Custom_button style={{backgroundColor: "grey"}} onClick={()=>window.location.pathname = "/register"}> 
+                        Go to Register 
                     </Custom_button>
                 </div>
             </form>

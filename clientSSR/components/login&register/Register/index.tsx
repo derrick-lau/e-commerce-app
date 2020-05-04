@@ -19,15 +19,17 @@ const Login: React.FC<Isign> = () => {
     
     const handleSubmit = async (event:React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
+        // const { password, confirmPassword } = this.state;
+        // // perform all neccassary validations
+        // if (password !== confirmPassword) {
+        //     alert("Passwords don't match");
+        // } else {
+        //     // make API call
+        // }
         // const { email, password } = userCredentials;
         //fetch
         SaveTokenToSession("123")
         window.location.pathname = "/"
-    };
-
-    const handleRegister = async (event:React.MouseEvent) => {
-        event.preventDefault();
-        window.location.pathname = "/register"
     };
     
     const handleChange = (event:React.ChangeEvent<HTMLFormElement>) => {
@@ -54,11 +56,18 @@ const Login: React.FC<Isign> = () => {
                     autoComplete="off" 
                     required
                 />
+                <Custom_input 
+                    label={null} 
+                    type='password'  
+                    onChange={handleChange} 
+                    placeholder='Confirm Password' 
+                    required
+                />
                 <div className={styles.buttons}>
-                    <Custom_button type='submit'> 
-                        Sign in 
+                    <Custom_button style={{backgroundColor: "grey"}} onClick={()=>window.location.pathname = "/login"}> 
+                        Go to Log in 
                     </Custom_button>
-                    <Custom_button style={{backgroundColor: "grey"}} onClick={handleRegister}> 
+                    <Custom_button type='submit'> 
                         Register 
                     </Custom_button>
                 </div>

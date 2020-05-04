@@ -16,10 +16,9 @@ class WishListProduct(db.Model):
     def json(self):
         product = self.product.findById(self.productId)
         return {
-            "id": self.id,
-            "userId": self.userId,
             "productId":self.productId,
             "productName":product.productName,
+            "image":product.image,
             "store":product.store.storeName,
             "price":product.price,
         }

@@ -6,7 +6,7 @@
     background: none;
     background-color: white;
     color: rgb(147, 147, 147);
-    font-size: 2vmin;
+    font-size: 2.6vmin;
     display: block;
     width: 100%;
     border: none;
@@ -15,5 +15,10 @@
     box-shadow: 1px 1px 1px rgb(171, 171, 171);
     margin: 2em 0;
     margin-top: 1em;
+}
+
+.custom_input_div label{
+    position: relative;
+    font-size: 2.5vmin;
 }
 

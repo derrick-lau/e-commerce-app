@@ -1,7 +1,7 @@
 import React from 'react'
 import ItrolleyProduct from '../../abstractions/ItrolleyProduct';
 import styles from './index.module.css'
-import CustomModal from '../../CustomModal';
+import CustomModal from '../../CustomModal/Confirmation';
 import Tbody from '../../custom_table/Tbody';
 
 const TrolleyProduct: React.FC<ItrolleyProduct> = ({productId, productName, image, quantity, total}) => {
@@ -12,9 +12,9 @@ const TrolleyProduct: React.FC<ItrolleyProduct> = ({productId, productName, imag
     return (
         <Tbody>
             <tr className={styles.image_container}>
-                <img src={image} alt='item' />
+                <td><img src={image} alt='item' /></td>
             </tr>
-            <tr className={styles.name}>{productName}</tr>
+            <tr className={styles.name}><td>{productName}</td></tr>
             <tr className={styles.quantity}>
                 <td className={styles.arrow} onClick={() => removeItem()}>
                     &#10094;
@@ -24,8 +24,8 @@ const TrolleyProduct: React.FC<ItrolleyProduct> = ({productId, productName, imag
                     &#10095;
                 </td>
             </tr>
-            <tr className={styles.price}>{total}</tr>
-            <CustomModal action={<>remove</>} logo={"/cross.png"}handleSave={() => clearItem()} />
+            <tr className={styles.price}><td>{total}</td></tr>
+            <tr><td><CustomModal action={<>remove</>} logo={"/cross.png"}handleSave={() => clearItem()} /></td></tr>
         </Tbody>
     )
 }

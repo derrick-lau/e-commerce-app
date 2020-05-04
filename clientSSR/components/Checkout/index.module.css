@@ -6,6 +6,20 @@
 }
 
 .buttons {
+  margin-top: 5vh;
     display: flex;
     justify-content: center;
+}
+
+.card {
+  background: none;
+  background-color: white;
+  color: rgb(147, 147, 147);
+  display: block;
+  width: 100%;
+  border-radius: 0;
+  border-bottom: 1px solid rgb(192, 191, 191);
+  box-shadow: 1px 1px 1px rgb(171, 171, 171);
+  margin: 2em 0;
+  margin-top: 1vh;
 }

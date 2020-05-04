@@ -1,0 +1,6 @@
+.title {
+    color: rgb(56, 55, 55);
+    font-size: 3vmin;
+    display: flex;
+    justify-content: center;
+}
