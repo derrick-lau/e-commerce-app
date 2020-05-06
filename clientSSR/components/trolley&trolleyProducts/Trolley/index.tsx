@@ -2,42 +2,32 @@ import React, { useState, useEffect } from 'react'
 import styles from './index.module.css'
 import TrolleyProduct from '../TrolleyProduct';
 import Custom_button from '../../Custom_button';
-import ItrolleyProduct from '../../../abstractions/ItrolleyProduct';
 import TableLayout from '../../custom_table/TableLayout';
 import Tr_Th from '../../custom_table/Tr_Th';
 import Thead from '../../custom_table/Thead';
 import Table_title from '../../custom_table/Table_title';
+import { TrolleyProductApi } from '../../../api';
+import Itrolley from '../../../abstractions/Itrolley';
 
 const Trolley: React.FC = () => {
 
-    const [trolley, setTrolley] = useState<ItrolleyProduct[]>([])
+    const [trolley, setTrolley] = useState<Itrolley>({trolleyProducts:[]})
     const [sum, setSum] = useState<number>(0)
 
     useEffect(() => {
       let total = 0;
-      trolley.forEach((TrolleyProduct) => {
+      trolley.trolleyProducts.forEach((TrolleyProduct) => {
         total += TrolleyProduct.total
       })
       setSum(total)
-    })
+    },[trolley])
 
     useEffect(() => {
-        setTrolley([
-            {
-            productId:1, 
-            productName:"Some product",
-            image:"https://www.amd.com/system/files/2020-02/312735-ryzen-3900x-pib-right-facing-withfan-bg-1260x709.jpg", 
-            quantity:2, 
-            total:30.0
-        },{
-            productId:2, 
-            productName:"Some product",
-            image:"https://www.amd.com/system/files/2020-02/312735-ryzen-3900x-pib-right-facing-withfan-bg-1260x709.jpg", 
-            quantity:3, 
-            total:65.0 
-        }
-    ])
-    }, [])
+      const fetch = async () => {
+        setTrolley(await TrolleyProductApi().getList());
+      };
+      fetch();
+    }, []);
     
     return (
       <main className={styles.tableMain}>
@@ -50,7 +40,7 @@ const Trolley: React.FC = () => {
             <Tr_Th>Price</Tr_Th>
             <Tr_Th>Remove</Tr_Th>
           </Thead>
-          {trolley.length > 0 ? trolley.map(props => {
+          {trolley.trolleyProducts.length > 0 ? trolley.trolleyProducts.map(props => {
             return(<TrolleyProduct key={props.productId} {...props} />)
           })
           :
@@ -59,9 +49,14 @@ const Trolley: React.FC = () => {
         </TableLayout> 
         <div className={styles.end}>
           <div className={styles.total}>TOTAL: £{sum}</div>
-          <Custom_button onClick={()=> window.location.pathname="/checkout"} style={{marginTop:"3vh", alignSelf: "flex-end"}}> 
-            Go to checkout 
-          </Custom_button>
+
+            <Custom_button 
+              onClick={()=> trolley.trolleyProducts.length > 0 ? window.location.pathname="/checkout":alert("Please add an product into your trolley first")} 
+              style={{marginTop:"3vh", alignSelf: "flex-end"}}
+            > 
+              Go to checkout 
+            </Custom_button>
+        
         </div>
       </main> 
     )

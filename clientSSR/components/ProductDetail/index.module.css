@@ -10,7 +10,7 @@
 .image {
     cursor: pointer;
     width: 50%;
-    height: auto;
+    max-height: 60vh;
     background-size: cover;
     background-position: center;
 }

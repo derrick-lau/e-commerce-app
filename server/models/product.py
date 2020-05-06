@@ -5,9 +5,9 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     productName = db.Column(db.String(100), unique=True)
-    description = db.Column(db.String)
+    description = db.Column(db.String(255))
     price = db.Column(db.Float(precision=2))
-    image = db.Column(db.String)
+    image = db.Column(db.String(255))
 
     store = db.relationship("Store")
     storeId = db.Column(db.Integer, db.ForeignKey("stores.id"))

@@ -9,6 +9,6 @@ The client is using Next.js (a framework of javascript) and TypeScript (a supers
 
 
 # Setup & Installation
-**client: run npm install & npm run dev in ./clientSSR
-**server: run add your own database URI in ./server .env & python app.py in ./server
+client: run npm install & npm run dev in ./clientSSR
+server: run add your own database URI in ./server .env & python app.py in ./server
 # Roadmap

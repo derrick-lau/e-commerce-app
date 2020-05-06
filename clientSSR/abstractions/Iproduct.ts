@@ -3,8 +3,9 @@ import Ireview from "./Ireview";
 export default interface Iproduct {
     id:number;
     productName:string;
-    image?:string;
     price:number;
+    
+    image?:string;
     description?:string
     isInStock?: boolean;
     reviews?: Ireview[];

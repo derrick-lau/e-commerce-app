@@ -13,7 +13,7 @@ class ReviewController(Resource):
     parser = reqparse.RequestParser()
 
     parser.add_argument(
-        "content", type=int, required=False, help="Every Review needs a content."
+        "content", type=str, required=False, help="Every Review needs a content."
     )
 
     parser.add_argument(
@@ -31,11 +31,12 @@ class ReviewController(Resource):
         userId = get_jwt_identity()
 
         if Review.findReviewByProductIdAndUserId(props["productId"], userId):
-            return {"message": "You already wrote a review for this product"}, 400
+            return {"message": "You already left a review of this product"}, 400
         else:
             review = Review(userId, **props)
 
         try:
+            print(review)
             review.save()
         except:
             return {"message": "Something was wrong when creating the store."}, 500

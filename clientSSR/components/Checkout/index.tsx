@@ -3,44 +3,34 @@ import styles from './index.module.css'
 import Custom_input from '../Custom_input'
 import Custom_button from '../Custom_button'
 import { useState, useEffect } from 'react';
-import ItrolleyProduct from '../../abstractions/ItrolleyProduct';
 import FormLayout from '../custom_form/FormLayout';
 import FormTitle from '../custom_form/FormTitle';
 import InewOrder from '../../abstractions/InewOrder';
 import {useStripe, CardElement, useElements} from '@stripe/react-stripe-js';
+import { TrolleyProductApi, OrderApi } from '../../api';
+import Itrolley from '../../abstractions/Itrolley';
 
 
 
 const CheckoutForm: React.FC= () => {
 
-    const [trolley, setTrolley] = useState<ItrolleyProduct[]>([]);
+    const [trolley, setTrolley] = useState<Itrolley>({trolleyProducts:[]});
     const [newOrder, setNewOrder] = useState<InewOrder>({fullname:"",address:"", cardName:"", cardNumber:"", expirationDate:"",CVV:"" });
+
     const [sum, setSum] = useState<Number>(0)
     const stripe = useStripe();
     const elements = useElements();
 
-    useEffect( () => { 
-        setTrolley([
-            {
-                productId:1, 
-                productName:"Some product",
-                image:"https://www.amd.com/system/files/2020-02/312735-ryzen-3900x-pib-right-facing-withfan-bg-1260x709.jpg", 
-                quantity:2, 
-                total:30.0
-            },{
-                productId:2, 
-                productName:"Some product",
-                image:"https://www.amd.com/system/files/2020-02/312735-ryzen-3900x-pib-right-facing-withfan-bg-1260x709.jpg", 
-                quantity:3, 
-                total:65.0 
-            }
-        ])
-    }
-    , [])
+    useEffect(() => {
+        const fetch = async () => {
+          setTrolley(await TrolleyProductApi().getList());
+        };
+        fetch();
+      }, []);
     
     useEffect(() => {
         let total = 0;
-        for (let trolleyProduct of trolley) {
+        for (let trolleyProduct of trolley.trolleyProducts) {
             total += trolleyProduct.total
         } 
         setSum(total)
@@ -56,19 +46,23 @@ const CheckoutForm: React.FC= () => {
           card: cardElement?cardElement:{token:""},
         });
         if (error) return false
+        return true
     }
 
     //handle submit order
     const handleSubmit = async (event:React.ChangeEvent<HTMLFormElement>) => {
+        
         event.preventDefault();
-        if(!handlePaymentSubmit()) return
-        //1. create order & get a orderId
-        console.log(newOrder.address)
-        //2. create orderProducts with the orderId
-        console.log(trolley)
-        //4. success or error message
-        //5. delete trolley
-        //6. redirect
+        if(!await handlePaymentSubmit()) return
+        try {
+            await OrderApi().post(newOrder.address, trolley.trolleyProducts)
+        } catch(e) {
+            return alert(e.response? e.response.data.message: e.toString())
+        }
+        for(let trolleyProduct of trolley.trolleyProducts) {
+            await TrolleyProductApi().deleteAll(trolleyProduct.productId)
+        }
+        window.location.pathname = "/"
     };
 
     

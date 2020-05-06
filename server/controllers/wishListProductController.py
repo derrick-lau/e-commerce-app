@@ -27,7 +27,7 @@ class AlterWishListProductController(Resource):
 
         userId = get_jwt_identity()
         if (WishListProduct.findByUserIdAndProductId(userId, productId)):
-            return {"message": "This is on you wish list already"}, 400
+            return {"message": "This product is on you wish list"}, 400
 
         wishListProduct = WishListProduct(userId, productId)
         try:
@@ -35,7 +35,7 @@ class AlterWishListProductController(Resource):
         except:
             return {"message": "Something was wrong when creating the wishListProduct."}, 500
         
-        return wishListProduct.json(), 201
+        return {"message": "Added to your wishList.", "wishListProduct":wishListProduct.json()}, 201
 
     @jwt_required
     def delete(self, productId: int):

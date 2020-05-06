@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react'
 import styles from './index.module.css'
 import Link from 'next/link'
 import CustomModal from '../CustomModal/Confirmation'
+import { LogoutApi} from '../../api'
 
 
 const Header: React.FC = () => {
     const [isLoggedin, setisLoggedin] = useState(false)
 
     useEffect(() => {
-        if(window.sessionStorage.getItem('token')) {
+        if(window.localStorage.getItem('accessToken')) {
             setisLoggedin(true)
         }
     }, [])
 
-    const handleLogout = () => {
-        window.sessionStorage.clear()
+    const handleLogout = async () => {
+   
+        await LogoutApi().post()
+        window.localStorage.removeItem('accessToken')
+        window.localStorage.removeItem('refreshToken')
         setisLoggedin(false)
     }
     
@@ -47,7 +51,10 @@ const Header: React.FC = () => {
                     
                     </>
                 : 
+                    <>
                     <Link href={'/login'} ><a href={'/login'} className={styles.route}><p>Log in</p></a></Link>
+                    <Link href={'/register'} ><a href={'/register'} className={styles.route}><p>Register</p></a></Link>
+                    </>
                 }
             </div>
         </header> 

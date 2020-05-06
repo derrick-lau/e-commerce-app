@@ -16,21 +16,23 @@ class TrolleyProductsController(Resource):
     @jwt_required
     def get(self):
         userId = get_jwt_identity()
-
+       
         if SessionTrolleyProduct.getTrolleyProducts(userId):
-            trolleyProducts = [SessionTrolleyProduct.getTrolleyProducts(userId)[key].json() for key in SessionTrolleyProduct.getTrolleyProducts(userId)]
 
-            return {"trolleyProducts": trolleyProducts}, 200
+            trolleyProducts = [SessionTrolleyProduct.getTrolleyProducts(userId)[key].json() for key in SessionTrolleyProduct.getTrolleyProducts(userId)]
+           
+            return {"trolleyProducts": trolleyProducts}, 200 , 
 
         else:
-            return {"message": "trolleyProducts not found."}, 404
+            return {"message": "trolley products not found."}, 404, 
 
 class AlterTrolleyProductController(Resource):
 
     @jwt_required
     def post(self, productId: int):
         if not Product.findById(productId):
-            return {"message": "This product does not exist"}, 404
+           
+            return {"message": "This product does not exist"}, 404, 
 
         userId = get_jwt_identity()
 
@@ -40,15 +42,15 @@ class AlterTrolleyProductController(Resource):
             trolleyProduct.add()
 
         except:
-            return {"message": "Something was wrong when creating the TrolleyProduct."}, 500
+            return {"message": "Something was wrong when creating the TrolleyProduct."}, 500, 
 
-        return  {"message": "TrolleyProduct created.", "trolleyProduct": trolleyProduct.json()}, 201
+        return  {"message": "Added to your trolley .", "trolleyProduct": trolleyProduct.json()}, 201, 
 
 
     @jwt_required
     def delete(self, productId: int):
         if not Product.findById(productId):
-            return {"message": "This product does not exist"}, 404
+            return {"message": "This product does not exist"}, 404, 
         else:
             userId = get_jwt_identity()
             trolleyProduct = SessionTrolleyProduct(productId, 1, userId)
@@ -57,7 +59,7 @@ class AlterTrolleyProductController(Resource):
                 trolleyProduct.deleteOne()
 
             except:
-                return {"message": "Something was wrong when deleting the TrolleyProduct."}, 500
+                return {"message": "Something was wrong when deleting the TrolleyProduct."}, 500, 
 
             return {"message": "TrolleyProduct was deleted."}, 200
 
@@ -66,7 +68,7 @@ class AlterTrolleyProductsController(Resource):
     @jwt_required
     def delete(self, productId: int):
         if not Product.findById(productId):
-            return {"message": "This product does not exist"}, 404
+            return {"message": "This product does not exist"}, 404, 
         else:
             userId = get_jwt_identity()
 
@@ -76,9 +78,9 @@ class AlterTrolleyProductsController(Resource):
                 trolleyProduct.deleteAll()
 
             except:
-                return {"message": "Something was wrong when deleting the TrolleyProducts."}, 500
+                return {"message": "Something was wrong when deleting the TrolleyProducts."}, 500, 
 
-            return {"message": "The trolleyProducts were deleted."}, 200
+            return {"message": "The trolleyProducts were deleted."}, 200, 
 
 
 

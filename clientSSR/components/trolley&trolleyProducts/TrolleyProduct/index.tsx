@@ -3,12 +3,10 @@ import ItrolleyProduct from '../../../abstractions/ItrolleyProduct';
 import styles from './index.module.css'
 import CustomModal from '../../CustomModal/Confirmation';
 import Tbody from '../../custom_table/Tbody';
+import { TrolleyProductApi } from '../../../api';
 
 const TrolleyProduct: React.FC<ItrolleyProduct> = ({productId, productName, image, quantity, total}) => {
-    console.log(productId)
-    const removeItem = () =>{}
-    const addItem =() => {}
-    const clearItem =() => {}
+
     return (
         <Tbody>
             <tr className={styles.image_container}>
@@ -16,16 +14,32 @@ const TrolleyProduct: React.FC<ItrolleyProduct> = ({productId, productName, imag
             </tr>
             <tr className={styles.name}><td>{productName}</td></tr>
             <tr className={styles.quantity}>
-                <td className={styles.arrow} onClick={() => removeItem()}>
+                <td className={styles.arrow} onClick={()=> TrolleyProductApi()
+                    .deleteOne(productId)
+                    .catch(e => e.response? e.response.data.message: e)
+                    .finally(()=>window.location.pathname="/trolley")
+                }>
                     &#10094;
                 </td>
                 <td className={styles.value}>{quantity}</td>
-                <td className={styles.arrow} onClick={() => addItem()}>
+                <td className={styles.arrow} onClick={()=> TrolleyProductApi()
+                    .post(productId)
+                    .catch(e => e.response? e.response.data.message: e)
+                    .finally(()=>window.location.pathname="/trolley")
+                }>
                     &#10095;
                 </td>
             </tr>
             <tr className={styles.price}><td>{total}</td></tr>
-            <tr><td><CustomModal action={<>remove</>} logo={"/cross.png"}handleSave={() => clearItem()} /></td></tr>
+            <tr>
+                <td>
+                    <CustomModal action={<>remove</>} logo={"/cross.png"} handleSave={()=> TrolleyProductApi()
+                        .deleteAll(productId)
+                        .catch(e => e.response? e.response.data.message: e)
+                        .finally(()=>window.location.pathname="/trolley")
+                    }/>
+                </td>
+            </tr>
         </Tbody>
     )
 }

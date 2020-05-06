@@ -2,9 +2,9 @@ import Route from '../Route';
 import Imenu from '../../../abstractions/Imenu';
 
 
-const Menu: React.FC<Imenu> = ({menu}) => (
+const Menu: React.FC<Imenu> = ({stores}) => (
     <>
-    {menu.map(({...props}) => (
+    {stores.map(({...props}) => (
         <Route key={props.id} {...props}/>
     ))}
     </>

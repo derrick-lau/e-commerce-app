@@ -5,8 +5,8 @@ class Store(db.Model):
     __tablename__ = "stores"
 
     id = db.Column(db.Integer, primary_key=True)
-    storeName = db.Column(db.String(100), unique=True)
-    image = db.Column(db.String)
+    storeName = db.Column(db.String(255), unique=True)
+    image = db.Column(db.String(255))
     products = db.relationship("Product", lazy="dynamic")
 
     def __init__(self, storeName, image):

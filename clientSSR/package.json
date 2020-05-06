@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next",
-    "type-check": "tsc"
+    "start": "HOST=0.0.0.0 next start -p 8080"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^1.1.2",
@@ -16,15 +15,21 @@
     "next": "latest",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.1",
-    "react-dom": "^16.12.0"
-  },
-  "devDependencies": {
+    "react-dom": "^16.12.0",
     "@types/next": "^9.0.0",
-    "@types/node": "^12.12.21",
+    "@types/node": "^12.12.38",
     "@types/react": "^16.9.16",
     "@types/react-alert": "^5.2.0",
     "@types/react-dom": "^16.9.4",
-    "typescript": "3.7.3"
+    "typescript": "^3.7.3"
+  },
+  "devDependencies": {
+    "@types/next": "^9.0.0",
+    "@types/node": "^12.12.38",
+    "@types/react": "^16.9.16",
+    "@types/react-alert": "^5.2.0",
+    "@types/react-dom": "^16.9.4",
+    "typescript": "^3.7.3"
   },
   "license": "ISC"
 }

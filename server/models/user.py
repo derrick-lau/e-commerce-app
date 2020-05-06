@@ -10,7 +10,7 @@ class User(db.Model):
     password = db.Column(db.String(100))
     isAdmin = db.Column(db.Boolean, unique=False, default=True)
     name = db.Column(db.String(100), default="User")
-    address = db.Column(db.String(200), default="")
+    address = db.Column(db.String(255), default="address")
     reviews = db.relationship("Review", lazy="dynamic")
 
     def __init__(self, username, password, name, address):

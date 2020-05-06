@@ -25,8 +25,13 @@ const shopPage: NextPage<Iproduct> = (props) => (
     </Layout>
 )
 
-shopPage.getInitialProps = async ({query}) => (
-    await ProductApi.get(query.productName.toString())
-)
+shopPage.getInitialProps = async ({query}) => {
+ 
+    try {
+        return await ProductApi().get(query.productName.toString())
+    } catch(e) {
+        return {productName:e.response? e.response.data.message: e.toString(), price:0, image:"",description:"", id:0}
+    }
+}
 
 export default shopPage;

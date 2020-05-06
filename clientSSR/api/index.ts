@@ -1,20 +1,26 @@
   
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import Iproduct from '../abstractions/Iproduct';
+import Imenu from '../abstractions/Imenu';
 import Istore from '../abstractions/Istore';
+import IwishList from '../abstractions/IwishList';
+import Itrolley from '../abstractions/Itrolley';
 import ItrolleyProduct from '../abstractions/ItrolleyProduct';
-import Iorder from '../abstractions/Iorder';
-
+import IorderList from '../abstractions/IorderList';
 axios.defaults.baseURL = 'http://localhost:8080';
 
-const requests = (token:string) => {
+
+const requests = (token: string | null, withCredentials?:boolean ) => {
     const responseBody = (response: AxiosResponse) => response.data;
 
     const config:AxiosRequestConfig = {
+        withCredentials:withCredentials? true:false,
         headers:{
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`
         }
     }
+
+    if(typeof window !== 'undefined') RefreshToken()
 
     return {
         get: (url: string) => axios.get(url, config).then(responseBody),
@@ -24,51 +30,83 @@ const requests = (token:string) => {
     }
 }
 
-const StoreApi = {
-    getList: (): Promise<Istore[]> => requests("").get('/stores'),
-    get: (name: string): Promise<Iproduct> => requests("").get(`/store/${name}`),
+
+const StoreApi = () => {
+    return {
+        getList: (): Promise<Imenu> => requests("").get('/stores'),
+        get: (name: string): Promise<Istore> => requests("").get(`/store/${name}`),
+    }
 }
 
-const ProductApi = {
-    getList: (storeId:number): Promise<Iproduct[]> => requests("").get(`/products/${storeId}`),
-    get: (name: string): Promise<Iproduct> => requests("").get(`/product/${name}`),
+const ProductApi = () => {
+    return {
+        getList: (storeId:number): Promise<Iproduct[]> => requests("").get(`/products/${storeId}`),
+        get: (name: string): Promise<Iproduct> => requests("").get(`/product/${name}`),
+    }
 }
 
-const WishListApi = {
-    getList: (token:string): Promise<Iproduct[]> => requests(token).get(`/wishList`),
-    post: (productId: number, token:string) => requests(token).post(`/wishList/${productId}`, {}),
-    delete: (productId: number, token:string) => requests(token).delete(`/wishList/${productId}`)
+const WishListApi = () => {
+    const token = window.localStorage.getItem('accessToken')
+    return {
+        getList: (): Promise<IwishList> => requests(token).get(`/wishList`),
+        post: (productId: number) => requests(token).post(`/wishList/${productId}`, {}),
+        delete: (productId: number) => requests(token).delete(`/wishList/${productId}`)
+    }
 }
 
-const TrolleyProductApi = {
-    getList: (token:string): Promise<ItrolleyProduct[]> => requests(token).get(`/trolley`),
-    post: (productId: number, token:string) => requests(token).post(`/trolley/${productId}`, {}),
-    deleteOne: (productId: number, token:string) => requests(token).delete(`/trolley/${productId}`),
-    deleteAll: (productId: number, token:string) => requests(token).delete(`/trolley/all/${productId}`)
+const TrolleyProductApi = () => {
+    const token = window.localStorage.getItem('accessToken')
+    return {
+        getList: (): Promise<Itrolley> => requests(token, true).get(`/trolley`),
+        post: (productId: number) => requests(token, true).post(`/trolley/${productId}`, {}),
+        deleteOne: (productId: number) => requests(token, true).delete(`/trolley/${productId}`),
+        deleteAll: (productId: number) => requests(token, true).delete(`/trolley/all/${productId}`)
+    }
 }
 
-const OrderApi = {
-    getList: (token:string): Promise<Iorder[]> => requests(token).get(`/order`),
-    get: (orderId: number, token:string): Promise<Iproduct> => requests(token).get(`/order/${orderId}`),
-    post: (address: string, orderProducts:Iproduct[], token:string) => requests(token).post(`/order`, {address, orderProducts}),
-    delete: (productId: number, token:string) => requests(token).delete(`/trolley/${productId}`)
+const OrderApi = () => {
+    const token = window.localStorage.getItem('accessToken')
+    return {
+        getList: (): Promise<IorderList> => requests(token).get(`/order`),
+        get: (orderId: number): Promise<Iproduct> => requests(token).get(`/order/${orderId}`),
+        post: (address: string, orderProducts:ItrolleyProduct[]) => requests(token).post(`/order`, {address, orderProducts}),
+        delete: (productId: number) => requests(token).delete(`/trolley/${productId}`)
+    } 
 }
 
-const ReviewApi = {
-    post: (content: string, rate:string, productId:number, token:string) => requests(token).post(`/review`, {rate, content, productId}),
+const ReviewApi = () => {
+    return {
+        post: (content: string, rate:number, productId:number) => requests(window.localStorage.getItem('accessToken')).post(`/review`, {rate, content, productId}),
+    }
 }
 
-const RegisterApi = {
-    post: (username: string, password:string, name:string) => requests("").post(`/register`, {username, password, name}),
+const RegisterApi = () => {
+    return {
+        post: (username: string, password:string, name:string) => requests("").post(`/register`, {username, password, name}),
+    }
 }
 
-const LoginApi = {
-    post: (username: string, password:string) => requests("").post(`/login`, {username, password}),
+const LoginApi = () => {
+    return {
+        post: (username: string, password:string) => requests("").post(`/login`, {username, password}),
+    }
 }
 
-const LogoutApi = {
-    post: (token:string) => requests(token).post(`/logout`, {})
+const LogoutApi = () => {
+    return {
+        post: () => requests(window.localStorage.getItem('accessToken')).post(`/logout`, {})
+    }
 }
+
+
+const RefreshToken = () => {
+    axios.post(`/refresh`, {}, { 
+        headers:{ 'Authorization': `Bearer ${window.localStorage.getItem('refreshToken')}`} 
+    })
+    .then((response: AxiosResponse) => response.data)
+    .then(token => window.localStorage.setItem('accessToken',token.accessToken) )
+}
+
 
 export {
     ProductApi,
@@ -79,5 +117,6 @@ export {
     ReviewApi,
     RegisterApi,
     LoginApi,
-    LogoutApi
+    LogoutApi,
+    RefreshToken
 }

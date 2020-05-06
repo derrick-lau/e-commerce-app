@@ -3,8 +3,10 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS, cross_origin
-
+import os
 from db import db
+from dotenv import load_dotenv
+
 from blacklist import BLACKLIST
 from controllers.userController import UserRegisterController, UserSigninController, UserController, TokenRefreshController, UserSignoutController
 from controllers.productController import ProductController, ProductsController
@@ -17,7 +19,8 @@ from controllers.sessionTrolleyController import TrolleyProductsController, Alte
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.sqlite"
+load_dotenv(".env")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI") ## put your own database uri in .env
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["JWT_BLACKLIST_ENABLED"] = True 
@@ -27,7 +30,9 @@ app.config["JWT_BLACKLIST_TOKEN_CHECKS"] = [
 ]  
 app.secret_key = "forka"  
 api = Api(app)
-CORS(app)
+CORS(app, allow_headers=[
+        "Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
+        supports_credentials=True)
 
 bcrypt = Bcrypt(app)
 
@@ -127,4 +132,5 @@ api.add_resource(UserController, "/user/<int:user_id>")
 
 if __name__ == "__main__":
     db.init_app(app)
-    app.run(port=8080, debug=True)
+    app.run(port=8080)
+    ##  use your own host

@@ -14,7 +14,7 @@ class SessionTrolleyProduct():
         return {
             "productId":self.productId,
             "productName":product.productName,
-            "image":product.store.image,
+            "image":product.image,
             "price":product.price,
             "quantity":self.quantity,
             "total":product.price * self.quantity,
@@ -22,8 +22,10 @@ class SessionTrolleyProduct():
 
     @classmethod 
     def getTrolleyProducts(cls, userId):
+        
         trolleyProducts = {}
         if f'{userId}' in session:
+      
             productIdList = session[f'{userId}']
             for productId in productIdList:
                 if productId in trolleyProducts:
@@ -44,8 +46,7 @@ class SessionTrolleyProduct():
         trolley = session[f'{self.userId}']
         trolley.append(self.productId)
         session[f'{self.userId}'] = trolley
-        print(session[f'{self.userId}'])
-
+      
 
     @classmethod 
     def delete(cls, self, isBreak: bool):

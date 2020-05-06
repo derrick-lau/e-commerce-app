@@ -7,8 +7,8 @@ class Payment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order = db.relationship("Order")
     orderId = db.Column(db.Integer, db.ForeignKey("orders.id"))
-    createAt = db.Column(db.String, default=datetime.datetime.utcnow)
-    method = db.Column(db.String)
+    createAt = db.Column(db.String(255), default=datetime.datetime.utcnow)
+    method = db.Column(db.String(255))
 
     def __init__(self, orderId, method):
         self.orderId = orderId

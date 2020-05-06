@@ -7,8 +7,8 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.relationship("User")
     userId = db.Column(db.Integer, db.ForeignKey("users.id"))
-    createAt = db.Column(db.String, default=datetime.datetime.utcnow)
-    address = db.Column(db.String)
+    createAt = db.Column(db.String(255), default=datetime.datetime.utcnow)
+    address = db.Column(db.String(255))
     orderProducts = db.relationship("OrderProduct", lazy="dynamic")
 
     def __init__(self, userId, address):

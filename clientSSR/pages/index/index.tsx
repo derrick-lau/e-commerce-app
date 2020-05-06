@@ -5,12 +5,13 @@ import Menu from '../../components/menu&route/Menu'
 
 import Imenu from '../../abstractions/Imenu'
 import Layout from '../../components/Layout'
+import { StoreApi } from '../../api'
 
 const IndexPage: NextPage<Imenu> = (props) => (
 
   <Layout>
       <main className={styles.homepage}>
-        <Menu menu={props.menu}/>
+        <Menu stores={props.stores}/>
       </main>
   </Layout>
 )
@@ -18,36 +19,14 @@ const IndexPage: NextPage<Imenu> = (props) => (
 
 IndexPage.getInitialProps = async () => {
     
-  // ...fetch
+  try {
 
-  return { 
-    menu:[
-    {
-        storeName: 'Processors',
-        image: '',
-        id: 1,
-    },
-    {
-      storeName: 'Motherboards',
-      image: '',
-      id: 2,
-    },
-    {
-      storeName: 'Memory',
-      image: '',
-      id: 3,
-    },
-    {
-      storeName: 'Graphics Card',
-      image: 'https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/graphic-cards/rtx-2080-super/geforce-rtx-2080-super-gallery-thumbnail-d-D.png',
-      id: 4,
-    },
-    {
-      storeName: 'Cases and Coolings',
-      image: '',
-      id: 5,
-    }
-  ]}
+    return await StoreApi().getList()
+
+  } catch(e) {
+    
+    return { stores:[{storeName: e.response? e.response.data.message: e.toString(),image: '',id: 1,}]}
+  }
 }
 
 export default IndexPage

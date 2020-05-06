@@ -25,11 +25,12 @@ const Login: React.FC<Isign> = () => {
             return alert("Passwords don't match");
         } else {
             try {
-                const res = await RegisterApi.post(email, name, password);
-                window.sessionStorage.setItem('token', res.refreshToken)
+                const res = await RegisterApi().post(email, name, password);
+                window.localStorage.setItem('accessToken', res.accessToken)
+                window.localStorage.setItem('refreshToken', res.refreshToken)
                 window.location.pathname = "/"
             } catch(e) {
-                alert(e.response.data.message)
+                alert(e.response? e.response.data.message: e)
             }
         }
     };
@@ -82,9 +83,6 @@ const Login: React.FC<Isign> = () => {
                     </Custom_button>
                 </div>
             </form>
-            <Custom_button style={{backgroundColor: "grey"}} onClick={()=>window.location.pathname = "/login"}> 
-                Go to Log in 
-            </Custom_button>
         </FormLayout>  
     )
 }

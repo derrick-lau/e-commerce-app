@@ -4,7 +4,7 @@ class Review(db.Model):
     __tablename__ = "reviews"
 
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String, default="")
+    content = db.Column(db.String(255), default="")
     rate = db.Column(db.Integer, default = 5)
     product = db.relationship("Product")
     user = db.relationship("User")
@@ -20,7 +20,7 @@ class Review(db.Model):
     def json(self):
         return {
             "id": self.id,
-            "name": user.findById(self.userId).name,
+            "name": self.user.findById(self.userId).name,
             "content": self.content,
             "rate": self.rate
         }

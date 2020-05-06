@@ -7,23 +7,21 @@
 }
 
 .id {
-    width: 15%;
-    margin-right: 5%;
+    width: 20%;
 }
 
 .createAt {
-    width: 30%;
-    margin-left: 2%;
+    width: 20%;
+    padding-left: 15%;
 }
 
-.address {
-    width: 11.5%;
+
+.products {
+    width: 40%;
+    display: flex;
     justify-content: flex-end;
-}
-  
-.quantity {
-    width: 30%;
     flex-direction: column;
-    margin-left: 2%;
+    margin-left: 20%;
 } 
+
 

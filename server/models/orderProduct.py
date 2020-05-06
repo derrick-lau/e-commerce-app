@@ -18,7 +18,7 @@ class OrderProduct(db.Model):
     def json(self):
         product = self.product.findById(self.productId)
         return {
-            "id": self.id,
+            "id": self.productId,
             "orderId": self.orderId,
             "productName":product.productName,
             "store":product.store.storeName,
