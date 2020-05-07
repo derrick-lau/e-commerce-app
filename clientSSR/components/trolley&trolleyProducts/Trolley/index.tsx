@@ -41,7 +41,7 @@ const Trolley: React.FC = () => {
             <Tr_Th>Remove</Tr_Th>
           </Thead>
           {trolley.trolleyProducts.length > 0 ? trolley.trolleyProducts.map(props => {
-            return(<TrolleyProduct key={props.productId} {...props} />)
+            return(<TrolleyProduct sum={sum} setSum={setSum} key={props.productId} {...props} />)
           })
           :
             null

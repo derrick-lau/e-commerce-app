@@ -4,4 +4,7 @@ export default interface ItrolleyProduct {
     image:string;
     quantity:number;
     total:number;
+    price:number;
+    setSum:Function;
+    sum:number;
 }
