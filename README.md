@@ -19,4 +19,4 @@ The client is using Next.js (a framework of javascript) and TypeScript (a supers
  
 # Roadmap 
 
- - redux and redux-saga for better state management
+ - redux and redux-saga for state management
