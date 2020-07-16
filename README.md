@@ -20,4 +20,3 @@ The client is using Next.js (a framework of javascript) and TypeScript (a supers
 # Roadmap 
 
  - redux and redux-saga for better state management
- - add services using java spring microservices
