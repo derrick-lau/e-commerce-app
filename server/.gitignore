@@ -1,6 +1,0 @@
-node_modules/
-.idea
-
-dev
-.next/
-next-env.d.ts

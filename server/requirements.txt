@@ -1,8 +1,0 @@
-Flask
-Flask-JWT-Extended
-Flask-RESTful
-Flask-SQLAlchemy
-Flask-Bcrypt
-Flask-Cors
-Python-Dotenv
-PyMySQL
